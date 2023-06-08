@@ -10,17 +10,19 @@ public class WorldManager : MonoBehaviour
     Color _pastBgColor, _currentBgColor;
     [SerializeField]
     Camera _camera;
+    [SerializeField]
+    int defaultTimeline = 0;
 
     public static WorldManager Instannce { get; private set; }
 
     private void Awake()
     {
         Instannce = this;
-        SetTimeline(0);
+        SetTimeline(defaultTimeline);
     }
     public void SetTimeline(int timeline)
     {
-        switch(timeline)
+        switch (timeline)
         {
             case 0:
                 _camera.backgroundColor = _pastBgColor;
