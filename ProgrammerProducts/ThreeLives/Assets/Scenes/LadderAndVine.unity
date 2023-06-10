@@ -295,6 +295,7 @@ MonoBehaviour:
   _pastBgColor: {r: 0.8039216, g: 0.8666667, b: 0.972549, a: 0}
   _currentBgColor: {r: 1, g: 0.75686276, b: 0.6156863, a: 0}
   _camera: {fileID: 519420031}
+  defaultTimeline: 0
 --- !u!4 &109609664
 Transform:
   m_ObjectHideFlags: 0
