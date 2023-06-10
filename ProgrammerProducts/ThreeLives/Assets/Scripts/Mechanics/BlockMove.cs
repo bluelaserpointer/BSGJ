@@ -46,10 +46,12 @@ public class BlockMove : MonoBehaviour
             childBlock.GetComponent<BoxCollider2D>().enabled = true;
         }
 
+        // 指定の位置まで運ぶと消える
         if (0.1 < this.transform.position.x - actionPoint.transform.position.x)
         {
             switchClock.Invoke();
             transform.position = new Vector3(transform.position.x, transform.position.y, 0.1f);
+            this.GetComponent<BoxCollider2D>().enabled = false;
             this.enabled = false;
         }
     }
