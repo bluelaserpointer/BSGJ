@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [DisallowMultipleComponent]
 public class WorldManager : MonoBehaviour
@@ -31,5 +32,11 @@ public class WorldManager : MonoBehaviour
                 _camera.backgroundColor = _currentBgColor;
                 break;
         }
+    }
+    public void LoadNewScene(string sceneName)
+    {
+        if (sceneName == "")
+            return;
+        SceneManager.LoadScene(sceneName);
     }
 }

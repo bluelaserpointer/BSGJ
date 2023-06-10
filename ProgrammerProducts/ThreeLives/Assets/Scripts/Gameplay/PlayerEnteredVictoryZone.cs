@@ -1,6 +1,7 @@
 using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
+using UnityEngine.SceneManagement;
 
 namespace Platformer.Gameplay
 {
@@ -17,8 +18,9 @@ namespace Platformer.Gameplay
 
         public override void Execute()
         {
-            model.player.animator.SetTrigger("victory");
+            //model.player.animator.SetTrigger("victory"); //TODO: new scene load animation
             model.player.controlEnabled = false;
+            WorldManager.Instannce.LoadNewScene(victoryZone.nextSceneName);
         }
     }
 }
