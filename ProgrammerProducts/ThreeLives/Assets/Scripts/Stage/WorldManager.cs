@@ -1,3 +1,6 @@
+using Platformer.Core;
+using Platformer.Mechanics;
+using Platformer.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +18,9 @@ public class WorldManager : MonoBehaviour
     int defaultTimeline = 0;
 
     public static WorldManager Instannce { get; private set; }
+
+    PlatformerModel _platformerModel = Simulation.GetModel<PlatformerModel>();
+    public static PlayerController PlayerController => Instannce._platformerModel.player;
 
     private void Awake()
     {
@@ -38,5 +44,9 @@ public class WorldManager : MonoBehaviour
         if (sceneName == "")
             return;
         SceneManager.LoadScene(sceneName);
+    }
+    public void PlayOneShotSound(AudioClip clip)
+    {
+        PlayerController.audioSource.PlayOneShot(clip);
     }
 }

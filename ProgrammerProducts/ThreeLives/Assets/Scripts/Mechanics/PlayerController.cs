@@ -20,7 +20,7 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
         [Header("Modified")]
-        public bool onLadder;
+        public int onLadderCount;
         [HideInInspector]
         public UnityAction interactAction;
 
@@ -46,6 +46,7 @@ namespace Platformer.Mechanics
         internal Animator animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
+        public bool OnLadder => onLadderCount > 0;
         public Bounds Bounds => collider2d.bounds;
 
         void Awake()
@@ -83,7 +84,7 @@ namespace Platformer.Mechanics
         }
         protected override void FixedUpdate()
         {
-            if (velocity.y < 0 && onLadder) //stop falling on ladder
+            if (velocity.y < 0 && OnLadder) //stop falling on ladder
             {
                 IsGrounded = true;
                 groundNormal = Vector2.up;
@@ -112,7 +113,7 @@ namespace Platformer.Mechanics
             if (!IsGrounded || velocity.y > 0)
             {
                 move = Vector2.up * deltaPosition.y;
-                if (onLadder)
+                if (OnLadder)
                 {
                     body.position += move;
                 }
@@ -121,6 +122,55 @@ namespace Platformer.Mechanics
                     PerformMovement(move, true);
                 }
             }
+        }
+
+        protected override void PerformMovement(Vector2 move, bool yMovement)
+        {
+            var distance = move.magnitude;
+
+            if (distance > minMoveDistance)
+            {
+                //check if we hit anything in current direction of travel
+                var count = body.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
+                for (var i = 0; i < count; i++)
+                {
+                    if (hitBuffer[i].collider.isTrigger)
+                        continue;
+                    var currentNormal = hitBuffer[i].normal;
+
+                    //is this surface flat enough to land on? (edit: skip isGround check if jumping on a ladder)
+                    if (!(OnLadder && (!yMovement || move.y > 0)) && currentNormal.y > minGroundNormalY)
+                    {
+                        IsGrounded = true;
+                        // if moving up, change the groundNormal to new surface normal.
+                        if (yMovement)
+                        {
+                            groundNormal = currentNormal;
+                            currentNormal.x = 0;
+                        }
+                    }
+                    if (IsGrounded)
+                    {
+                        //how much of our velocity aligns with surface normal?
+                        var projection = Vector2.Dot(velocity, currentNormal);
+                        if (projection < 0)
+                        {
+                            //slower velocity if moving against the normal (up a hill).
+                            velocity = velocity - projection * currentNormal;
+                        }
+                    }
+                    else
+                    {
+                        //We are airborne, but hit something, so cancel vertical up and horizontal velocity.
+                        velocity.x *= 0;
+                        velocity.y = Mathf.Min(velocity.y, 0);
+                    }
+                    //remove shellDistance from actual move distance.
+                    var modifiedDistance = hitBuffer[i].distance - shellRadius;
+                    distance = modifiedDistance < distance ? modifiedDistance : distance;
+                }
+            }
+            body.position = body.position + move.normalized * distance;
         }
 
         void UpdateJumpState()

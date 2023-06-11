@@ -8,8 +8,9 @@ using Platformer.Model;
 public class BlockMove : MonoBehaviour
 {
     public UnityEvent switchClock;
+    [SerializeField]
+    GameObject parentBlock;
     GameObject player;
-    GameObject childBlock;
     [SerializeField] GameObject actionPoint;
     bool isMoving = false;
     Vector3 offsetPos;
@@ -21,14 +22,13 @@ public class BlockMove : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         defaultPos = transform.position;
-        childBlock = transform.GetChild(0).gameObject;
     }
     private void Update()
     {
         if (isMoving)
         {
             // ブロックの当たり判定が邪魔して押し進めないのでcolliderを消す もうちょっといい処理あるかも
-            childBlock.GetComponent<BoxCollider2D>().enabled = false;
+            parentBlock.GetComponent<BoxCollider2D>().enabled = false;
 
             // ジャンプすると解除
             if (0.1 < offsetPos.y - transform.position.y + player.transform.position.y)
@@ -39,11 +39,11 @@ public class BlockMove : MonoBehaviour
             // プレイヤーと一緒にブロックを動かす
             Vector3 pos = player.transform.position + offsetPos;
             pos.y = defaultPos.y;
-            transform.position = pos;
+            parentBlock.transform.position = pos;
         }
         else
         {
-            childBlock.GetComponent<BoxCollider2D>().enabled = true;
+            parentBlock.GetComponent<BoxCollider2D>().enabled = true;
         }
 
         // 指定の位置まで運ぶと消える
@@ -53,6 +53,7 @@ public class BlockMove : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 0.1f);
             this.GetComponent<BoxCollider2D>().enabled = false;
             this.enabled = false;
+            parentBlock.GetComponent<BoxCollider2D>().enabled = true;
         }
     }
     public void MoveWithPlayer()
