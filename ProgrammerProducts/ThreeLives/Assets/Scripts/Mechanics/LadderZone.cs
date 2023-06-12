@@ -15,7 +15,7 @@ namespace Platformer.Mechanics
             var p = collider.gameObject.GetComponent<PlayerController>();
             if (p != null)
             {
-                ++model.player.onLadderCount;
+                ++model.player._onLadderCount;
             }
         }
         void OnTriggerExit2D(Collider2D collider)
@@ -23,7 +23,7 @@ namespace Platformer.Mechanics
             var p = collider.gameObject.GetComponent<PlayerController>();
             if (p != null)
             {
-                --model.player.onLadderCount;
+                --model.player._onLadderCount;
             }
         }
     }

@@ -47,6 +47,6 @@ public class WorldManager : MonoBehaviour
     }
     public void PlayOneShotSound(AudioClip clip)
     {
-        PlayerController.audioSource.PlayOneShot(clip);
+        PlayerController.AudioSource.PlayOneShot(clip);
     }
 }
