@@ -58,6 +58,7 @@ MonoBehaviour:
   ouchAudio: {fileID: 8300000, guid: 6c05149e5a2fba64ba172e25a61074b7, type: 3}
   controlEnabled: 1
   maxSpeed: 3
+  _maxLadderClimbDownSpeed: 5
   jumpTakeOffSpeed: 7
   jumpState: 0
   _onLadderCount: 0

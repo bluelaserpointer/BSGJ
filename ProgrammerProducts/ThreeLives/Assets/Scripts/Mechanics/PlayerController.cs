@@ -8,6 +8,7 @@ using Platformer.Core;
 using Unity.VisualScripting;
 using UnityEngine.Events;
 using System.Linq;
+using UnityEditorInternal;
 
 namespace Platformer.Mechanics
 {
@@ -30,6 +31,11 @@ namespace Platformer.Mechanics
         /// </summary>
         public float maxSpeed = 7;
         /// <summary>
+        /// Max vertical speed of climbing down.
+        /// </summary>
+        [SerializeField]
+        float _maxClimbDownSpeed = 5;
+        /// <summary>
         /// Initial jump velocity at the start of a jump.
         /// </summary>
         public float jumpTakeOffSpeed = 7;
@@ -44,6 +50,7 @@ namespace Platformer.Mechanics
 
         private bool _stopJump;
         bool _jump;
+        bool _down;
         Vector2 _move;
         SpriteRenderer _spriteRenderer;
         internal Animator _animator;
@@ -76,6 +83,7 @@ namespace Platformer.Mechanics
             if (controlEnabled)
             {
                 _move.x = Input.GetAxis("Horizontal");
+                _down = Input.GetAxis("Vertical") < 0;
                 if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
                     jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump"))
@@ -101,7 +109,7 @@ namespace Platformer.Mechanics
         }
         protected override void FixedUpdate()
         {
-            if (velocity.y < 0 && OnLadder) //stop falling on ladder
+            if (velocity.y < 0 && OnLadder && !_down) //stop falling on ladder
             {
                 IsGrounded = true;
                 groundNormal = Vector2.up;
@@ -111,7 +119,13 @@ namespace Platformer.Mechanics
                 IsGrounded = false;
                 //if already falling, fall faster than the jump speed, otherwise use normal gravity.
                 if (velocity.y < 0)
+                {
                     velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
+                    if(OnLadder && _down && velocity.y < -_maxClimbDownSpeed)
+                    {
+                        velocity.y = -_maxClimbDownSpeed;
+                    }
+                }
                 else
                     velocity += Physics2D.gravity * Time.deltaTime;
             }
@@ -156,10 +170,12 @@ namespace Platformer.Mechanics
                         continue;
                     if (_penetratingColliders.Contains(hitInfo.collider))
                         continue;
-                    //penetrate edge collider ceilings while jumping
                     if (hitInfo.collider.GetType() == typeof(EdgeCollider2D))
-                    {
-                        if (move.y >= 0)
+                    {   
+                        if (
+                            move.y >= 0 //penetrate edge collider ceilings while jumping
+                            || OnLadder && _down //penetrate edge coolider grounds while climb down ladders
+                            )
                         {
                             //remember those colliders should be ignored while overlapping
                             _penetratingColliders.Add(hitInfo.collider);
