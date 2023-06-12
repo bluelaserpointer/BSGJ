@@ -4,7 +4,10 @@ using Platformer.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+
+public enum Timeline { Past, Current }
 
 [DisallowMultipleComponent]
 public class WorldManager : MonoBehaviour
@@ -15,9 +18,19 @@ public class WorldManager : MonoBehaviour
     [SerializeField]
     Camera _camera;
     [SerializeField]
-    int defaultTimeline = 0;
+    Timeline defaultTimeline = Timeline.Past;
+
+    [Header("SE")]
+    [SerializeField]
+    AudioClip _timeshiftSE;
+
+    public readonly UnityEvent
+        onShiftTime = new UnityEvent(),
+        onShiftPastTime = new UnityEvent(),
+        onShiftCurrentTime = new UnityEvent();
 
     public static WorldManager Instannce { get; private set; }
+    public Timeline Timeline { get; private set; }
 
     PlatformerModel _platformerModel = Simulation.GetModel<PlatformerModel>();
     public static PlayerController PlayerController => Instannce._platformerModel.player;
@@ -25,19 +38,26 @@ public class WorldManager : MonoBehaviour
     private void Awake()
     {
         Instannce = this;
-        SetTimeline(defaultTimeline);
+        SetTimeline(defaultTimeline, true);
     }
-    public void SetTimeline(int timeline)
+    public void SetTimeline(Timeline timeline, bool initalizing = false)
     {
-        switch (timeline)
+        if (!initalizing)
         {
-            case 0:
+            PlayOneShotSound(_timeshiftSE);
+        }
+        switch (Timeline = timeline)
+        {
+            case Timeline.Past:
+                onShiftPastTime.Invoke();
                 _camera.backgroundColor = _pastBgColor;
                 break;
-            case 1:
+            case Timeline.Current:
+                onShiftCurrentTime.Invoke();
                 _camera.backgroundColor = _currentBgColor;
                 break;
         }
+        onShiftTime.Invoke();
     }
     public void LoadNewScene(string sceneName)
     {

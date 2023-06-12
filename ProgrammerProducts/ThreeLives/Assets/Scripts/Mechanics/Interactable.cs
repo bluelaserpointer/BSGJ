@@ -17,7 +17,7 @@ namespace Platformer.Mechanics
 
         private PlatformerModel _platformerModel = Simulation.GetModel<PlatformerModel>();
         PlayerController Player => _platformerModel.player;
-        private void Awake()
+        protected virtual void Awake()
         {
             if (_stepInActiveObj != null)
                 _stepInActiveObj.SetActive(false);
