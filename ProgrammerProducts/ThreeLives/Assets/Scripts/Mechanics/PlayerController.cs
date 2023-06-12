@@ -123,20 +123,20 @@ namespace Platformer.Mechanics
 
             var moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
 
-            var move = moveAlongGround * deltaPosition.x;
+            var xmove = moveAlongGround * deltaPosition.x;
+            PerformMovement(xmove, false);
 
-            PerformMovement(move, false);
 
             if (!IsGrounded || velocity.y > 0)
             {
-                move = Vector2.up * deltaPosition.y;
+                Vector2 ymove = Vector2.up * deltaPosition.y;
                 if (OnLadder)
                 {
-                    body.position += move;
+                    body.position += ymove;
                 }
                 else
                 {
-                    PerformMovement(move, true);
+                    PerformMovement(ymove, true);
                 }
             }
         }
@@ -161,31 +161,29 @@ namespace Platformer.Mechanics
                     {
                         if (move.y >= 0)
                         {
+                            //remember those colliders should be ignored while overlapping
                             _penetratingColliders.Add(hitInfo.collider);
                             continue;
                         }
                     }
                     var currentNormal = hitInfo.normal;
 
-                    //is this surface flat enough to land on? (edit: skip isGround check if jumping on a ladder)
-                    if (!(OnLadder && (!yMovement || move.y > 0)) && currentNormal.y > minGroundNormalY)
+                    //is this surface flat enough to land on?
+                    if (currentNormal.y > minGroundNormalY)
                     {
                         IsGrounded = true;
-                        // if moving up, change the groundNormal to new surface normal.
-                        if (yMovement)
-                        {
-                            groundNormal = currentNormal;
-                            currentNormal.x = 0;
-                        }
+                        // edit: disabled yMovement check from original
+                        groundNormal = currentNormal;
+                        currentNormal.x = 0;
                     }
                     if (IsGrounded)
                     {
                         //how much of our velocity aligns with surface normal?
                         var projection = Vector2.Dot(velocity, currentNormal);
+                        //slower velocity if moving against the normal (up a hill).
                         if (projection < 0)
                         {
-                            //slower velocity if moving against the normal (up a hill).
-                            velocity = velocity - projection * currentNormal;
+                            velocity -= projection * currentNormal;
                         }
                     }
                     else
@@ -199,7 +197,7 @@ namespace Platformer.Mechanics
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
                 }
             }
-            body.position = body.position + move.normalized * distance;
+            body.position += move.normalized * distance;
         }
 
         void UpdateJumpState()
