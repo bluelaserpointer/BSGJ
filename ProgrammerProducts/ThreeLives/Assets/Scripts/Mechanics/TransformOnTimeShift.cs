@@ -10,7 +10,8 @@ namespace Platformer.Mechanics
     {
         [SerializeField]
         GameObject _pastForm, _currentForm;
-
+        [SerializeField]
+        UnityEvent _onPast, _onCurrent;
         private void Start()
         {
             WorldManager.Instannce.onShiftTime.AddListener(() => TransformByTimeline());
@@ -18,15 +19,23 @@ namespace Platformer.Mechanics
         }
         public void TransformByTimeline()
         {
+            if(!gameObject.activeInHierarchy)
+                return;
             switch (WorldManager.Instannce.Timeline)
             {
                 case Timeline.Past:
-                    _pastForm?.SetActive(true);
-                    _currentForm?.SetActive(false);
+                    if(_pastForm != null)
+                        _pastForm.SetActive(true);
+                    if (_currentForm != null)
+                        _currentForm.SetActive(false);
+                    _onPast.Invoke();
                     break;
                 case Timeline.Current:
-                    _pastForm?.SetActive(false);
-                    _currentForm?.SetActive(true);
+                    if (_pastForm != null)
+                        _pastForm.SetActive(false);
+                    if (_currentForm != null)
+                        _currentForm.SetActive(true);
+                    _onCurrent.Invoke();
                     break;
             }
         }

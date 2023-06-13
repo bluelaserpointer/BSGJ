@@ -5,11 +5,7 @@ using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
-using Unity.VisualScripting;
-using UnityEngine.Events;
 using System.Linq;
-using UnityEditorInternal;
-using TreeEditor;
 
 namespace Platformer.Mechanics
 {
@@ -62,7 +58,7 @@ namespace Platformer.Mechanics
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         [HideInInspector]
-        public UnityAction interactAction;
+        public Interactable avaliableInteractable;
 
         [HideInInspector]
         public int _onLadderCount;
@@ -85,7 +81,11 @@ namespace Platformer.Mechanics
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                interactAction?.Invoke();
+                avaliableInteractable?.OnInteract.Invoke();
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                avaliableInteractable?.OnInteractStay.Invoke();
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -230,11 +230,16 @@ namespace Platformer.Mechanics
                     //is this surface flat enough to land on?
                     if (currentNormal.y > minGroundNormalY)
                     {
+                        //print(currentNormal.y + " bigger " + minGroundNormalY);
                         IsGrounded = true;
                         GroundCollider = hitInfo.collider;
                         // edit: disabled yMovement check from original
                         groundNormal = currentNormal;
                         currentNormal.x = 0;
+                    }
+                    else
+                    {
+                        //print(currentNormal.y + " smaller " + minGroundNormalY);
                     }
                     if (IsGrounded)
                     {
