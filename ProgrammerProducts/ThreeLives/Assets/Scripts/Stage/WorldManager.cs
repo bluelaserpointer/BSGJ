@@ -33,7 +33,7 @@ public class WorldManager : MonoBehaviour
     public Timeline Timeline { get; private set; }
 
     PlatformerModel _platformerModel = Simulation.GetModel<PlatformerModel>();
-    public static PlayerController PlayerController => Instannce._platformerModel.player;
+    public static PlayerController Player => Instannce._platformerModel.player;
 
     private void Awake()
     {
@@ -67,6 +67,6 @@ public class WorldManager : MonoBehaviour
     }
     public void PlayOneShotSound(AudioClip clip)
     {
-        PlayerController.AudioSource.PlayOneShot(clip);
+        Player.AudioSource.PlayOneShot(clip);
     }
 }

@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 using UnityEngine.Events;
 using System.Linq;
 using UnityEditorInternal;
+using TreeEditor;
 
 namespace Platformer.Mechanics
 {
@@ -24,6 +25,9 @@ namespace Platformer.Mechanics
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
 
+        [Header("Ability")]
+        [SerializeField]
+        Vine _vineSeedPrefab;
         [Header("Mobility")]
         public bool controlEnabled = true;
         /// <summary>
@@ -44,6 +48,7 @@ namespace Platformer.Mechanics
 
         //Hide from inspector
         public Collider2D Collider2d { get; private set; }
+        public Collider2D GroundCollider { get; private set; }
         public Bounds Bounds => Collider2d.bounds;
         public Health Health { get; private set; }
         public AudioSource AudioSource { get; private set; }
@@ -64,9 +69,11 @@ namespace Platformer.Mechanics
         public bool OnLadder => _onLadderCount > 0;
         List<Collider2D> _penetratingColliders = new List<Collider2D>();
 
+        List<PlantableObject> _plantedObjects = new List<PlantableObject>();
+
+
         void Awake()
         {
-
             Health = GetComponent<Health>();
             AudioSource = GetComponent<AudioSource>();
             Collider2d = GetComponent<Collider2D>();
@@ -79,6 +86,33 @@ namespace Platformer.Mechanics
             if(Input.GetKeyDown(KeyCode.E))
             {
                 interactAction?.Invoke();
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if(!GroundCollider)
+                {
+                    //cannot plant in this position
+                }
+                else if (WorldManager.Instannce.Timeline == Timeline.Current)
+                {
+                    //prevent plant action in current time
+                }
+                else
+                {
+                    Transform seedTarget;
+                    TransformOnTimeShift parentTransformNode = GroundCollider.GetComponentInParent<TransformOnTimeShift>();
+                    if(parentTransformNode != null)
+                    {
+                        seedTarget = parentTransformNode.transform;
+                    }
+                    else
+                    {
+                        seedTarget = GroundCollider.transform;
+                    }
+                    Vine vine = Instantiate(_vineSeedPrefab, seedTarget);
+                    vine.transform.position = transform.position;
+                    _plantedObjects.Add(vine);
+                }
             }
             if (controlEnabled)
             {
@@ -112,11 +146,13 @@ namespace Platformer.Mechanics
             if (velocity.y < 0 && OnLadder && !_down) //stop falling on ladder
             {
                 IsGrounded = true;
+                GroundCollider = null;
                 groundNormal = Vector2.up;
             }
             else
             {
                 IsGrounded = false;
+                GroundCollider = null;
                 //if already falling, fall faster than the jump speed, otherwise use normal gravity.
                 if (velocity.y < 0)
                 {
@@ -155,6 +191,13 @@ namespace Platformer.Mechanics
             }
         }
 
+        public void RemoveAllPlantedObjects()
+        {
+            foreach(var plant in _plantedObjects)
+            {
+                Destroy(plant.gameObject);
+            }
+        }
         protected override void PerformMovement(Vector2 move, bool yMovement)
         {
             var distance = move.magnitude;
@@ -188,6 +231,7 @@ namespace Platformer.Mechanics
                     if (currentNormal.y > minGroundNormalY)
                     {
                         IsGrounded = true;
+                        GroundCollider = hitInfo.collider;
                         // edit: disabled yMovement check from original
                         groundNormal = currentNormal;
                         currentNormal.x = 0;
