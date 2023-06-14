@@ -20,6 +20,8 @@ namespace Platformer.Mechanics
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
+        [SerializeField]
+        AudioClip _plantAudio;
 
         [Header("Ability")]
         [SerializeField]
@@ -113,6 +115,7 @@ namespace Platformer.Mechanics
                     }
                     Vine vine = Instantiate(_vineSeedPrefab, seedTarget);
                     vine.transform.position = transform.position;
+                    WorldManager.Instannce.PlayOneShotSound(_plantAudio);
                     _plantedObjects.Add(vine);
                 }
             }

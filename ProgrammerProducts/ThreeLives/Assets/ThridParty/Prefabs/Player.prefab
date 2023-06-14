@@ -56,6 +56,7 @@ MonoBehaviour:
   jumpAudio: {fileID: 8300000, guid: 0ac04a932c47168419a2383776eaa82b, type: 3}
   respawnAudio: {fileID: 8300000, guid: e18959d46b63f3c4c8cc020a433cf848, type: 3}
   ouchAudio: {fileID: 8300000, guid: 6c05149e5a2fba64ba172e25a61074b7, type: 3}
+  _plantAudio: {fileID: 8300000, guid: be1cabcf4be39b3418e310cd4df2f26e, type: 3}
   _vineSeedPrefab: {fileID: 4926947861819886457, guid: 3b73b0c224e72744b8d8bdc4487dff35,
     type: 3}
   controlEnabled: 1
@@ -63,6 +64,7 @@ MonoBehaviour:
   _maxClimbDownSpeed: 5
   jumpTakeOffSpeed: 7
   jumpState: 0
+  avaliableInteractable: {fileID: 0}
   _onLadderCount: 0
 --- !u!212 &212064061491315838
 SpriteRenderer:
