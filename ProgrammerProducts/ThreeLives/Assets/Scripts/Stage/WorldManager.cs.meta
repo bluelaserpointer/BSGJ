@@ -3,7 +3,9 @@ guid: b0ae686b56073664da4881df4aa83b88
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _camera: {instanceID: 0}
+  - _timeshiftSE: {fileID: 8300000, guid: 6c8bc7d093ab6f74388dd4e06c797d55, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

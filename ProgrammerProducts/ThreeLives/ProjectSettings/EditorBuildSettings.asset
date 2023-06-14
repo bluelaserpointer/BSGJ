@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LadderAndVine.unity
     guid: 2adf7c965697f2347bebf6c4ffca14d6
+  - enabled: 1
+    path: Assets/Scenes/DummyStage.unity
+    guid: a96668f96911bcc4ba41292a66034539
+  - enabled: 1
+    path: Assets/Scenes/ClockTower.unity
+    guid: b6cb2bc23b22242938291a29acbc96db
   m_configObjects: {}

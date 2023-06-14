@@ -11,11 +11,6 @@ namespace Platformer.UI
     public class MetaGameController : MonoBehaviour
     {
         /// <summary>
-        /// The main UI object which used for the menu.
-        /// </summary>
-        public MainUIController mainMenu;
-
-        /// <summary>
         /// A list of canvas objects which are used during gameplay (when the main ui is turned off)
         /// </summary>
         public Canvas[] gamePlayCanvasii;
@@ -49,13 +44,11 @@ namespace Platformer.UI
             if (show)
             {
                 Time.timeScale = 0;
-                mainMenu.gameObject.SetActive(true);
                 foreach (var i in gamePlayCanvasii) i.gameObject.SetActive(false);
             }
             else
             {
                 Time.timeScale = 1;
-                mainMenu.gameObject.SetActive(false);
                 foreach (var i in gamePlayCanvasii) i.gameObject.SetActive(true);
             }
             this.showMainCanvas = show;

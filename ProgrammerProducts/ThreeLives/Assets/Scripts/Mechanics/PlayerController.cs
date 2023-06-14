@@ -7,6 +7,8 @@ using Platformer.Model;
 using Platformer.Core;
 using Unity.VisualScripting;
 using UnityEngine.Events;
+using System.Linq;
+using UnityEditorInternal;
 
 namespace Platformer.Mechanics
 {
@@ -16,45 +18,60 @@ namespace Platformer.Mechanics
     /// </summary>
     public class PlayerController : KinematicObject
     {
+        //Inspector
+        [Header("SE")]
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
-        [Header("Modified")]
-        public bool onLadder;
-        [HideInInspector]
-        public UnityAction interactAction;
 
+        [Header("Mobility")]
+        public bool controlEnabled = true;
         /// <summary>
         /// Max horizontal speed of the player.
         /// </summary>
         public float maxSpeed = 7;
+        /// <summary>
+        /// Max vertical speed of climbing down.
+        /// </summary>
+        [SerializeField]
+        float _maxClimbDownSpeed = 5;
         /// <summary>
         /// Initial jump velocity at the start of a jump.
         /// </summary>
         public float jumpTakeOffSpeed = 7;
 
         public JumpState jumpState = JumpState.Grounded;
-        private bool stopJump;
-        /*internal new*/ public Collider2D collider2d;
-        /*internal new*/ public AudioSource audioSource;
-        public Health health;
-        public bool controlEnabled = true;
 
-        bool jump;
-        Vector2 move;
-        SpriteRenderer spriteRenderer;
-        internal Animator animator;
+        //Hide from inspector
+        public Collider2D Collider2d { get; private set; }
+        public Bounds Bounds => Collider2d.bounds;
+        public Health Health { get; private set; }
+        public AudioSource AudioSource { get; private set; }
+
+        private bool _stopJump;
+        bool _jump;
+        bool _down;
+        Vector2 _move;
+        SpriteRenderer _spriteRenderer;
+        internal Animator _animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
-        public Bounds Bounds => collider2d.bounds;
+        [HideInInspector]
+        public UnityAction interactAction;
+
+        [HideInInspector]
+        public int _onLadderCount;
+        public bool OnLadder => _onLadderCount > 0;
+        List<Collider2D> _penetratingColliders = new List<Collider2D>();
 
         void Awake()
         {
-            health = GetComponent<Health>();
-            audioSource = GetComponent<AudioSource>();
-            collider2d = GetComponent<Collider2D>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            animator = GetComponent<Animator>();
+
+            Health = GetComponent<Health>();
+            AudioSource = GetComponent<AudioSource>();
+            Collider2d = GetComponent<Collider2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
         }
 
         protected override void Update()
@@ -65,25 +82,34 @@ namespace Platformer.Mechanics
             }
             if (controlEnabled)
             {
-                move.x = Input.GetAxis("Horizontal");
+                _move.x = Input.GetAxis("Horizontal");
+                _down = Input.GetAxis("Vertical") < 0;
                 if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
                     jumpState = JumpState.PrepareToJump;
                 else if (Input.GetButtonUp("Jump"))
                 {
-                    stopJump = true;
+                    _stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
                 }
             }
             else
             {
-                move.x = 0;
+                _move.x = 0;
+            }
+            //stop ignoring not overlapped penetrating colliders
+            foreach (Collider2D penetratingCollider in _penetratingColliders.ToList())
+            {
+                if(!Collider2d.Distance(penetratingCollider).isOverlapped)
+                {
+                    _penetratingColliders.Remove(penetratingCollider);
+                }
             }
             UpdateJumpState();
             base.Update();
         }
         protected override void FixedUpdate()
         {
-            if (velocity.y < 0 && onLadder) //stop falling on ladder
+            if (velocity.y < 0 && OnLadder && !_down) //stop falling on ladder
             {
                 IsGrounded = true;
                 groundNormal = Vector2.up;
@@ -93,7 +119,13 @@ namespace Platformer.Mechanics
                 IsGrounded = false;
                 //if already falling, fall faster than the jump speed, otherwise use normal gravity.
                 if (velocity.y < 0)
+                {
                     velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
+                    if(OnLadder && _down && velocity.y < -_maxClimbDownSpeed)
+                    {
+                        velocity.y = -_maxClimbDownSpeed;
+                    }
+                }
                 else
                     velocity += Physics2D.gravity * Time.deltaTime;
             }
@@ -105,33 +137,94 @@ namespace Platformer.Mechanics
 
             var moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
 
-            var move = moveAlongGround * deltaPosition.x;
+            var xmove = moveAlongGround * deltaPosition.x;
+            PerformMovement(xmove, false);
 
-            PerformMovement(move, false);
 
             if (!IsGrounded || velocity.y > 0)
             {
-                move = Vector2.up * deltaPosition.y;
-                if (onLadder)
+                Vector2 ymove = Vector2.up * deltaPosition.y;
+                if (OnLadder)
                 {
-                    body.position += move;
+                    body.position += ymove;
                 }
                 else
                 {
-                    PerformMovement(move, true);
+                    PerformMovement(ymove, true);
                 }
             }
         }
 
+        protected override void PerformMovement(Vector2 move, bool yMovement)
+        {
+            var distance = move.magnitude;
+
+            if (distance > minMoveDistance)
+            {
+                //check if we hit anything in current direction of travel
+                var hitCount = body.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
+                for (int i = 0; i < hitCount; ++i)
+                {
+                    RaycastHit2D hitInfo = hitBuffer[i];
+                    if (hitInfo.collider.isTrigger)
+                        continue;
+                    if (_penetratingColliders.Contains(hitInfo.collider))
+                        continue;
+                    if (hitInfo.collider.GetType() == typeof(EdgeCollider2D))
+                    {   
+                        if (
+                            move.y >= 0 //penetrate edge collider ceilings while jumping
+                            || OnLadder && _down //penetrate edge coolider grounds while climb down ladders
+                            )
+                        {
+                            //remember those colliders should be ignored while overlapping
+                            _penetratingColliders.Add(hitInfo.collider);
+                            continue;
+                        }
+                    }
+                    var currentNormal = hitInfo.normal;
+
+                    //is this surface flat enough to land on?
+                    if (currentNormal.y > minGroundNormalY)
+                    {
+                        IsGrounded = true;
+                        // edit: disabled yMovement check from original
+                        groundNormal = currentNormal;
+                        currentNormal.x = 0;
+                    }
+                    if (IsGrounded)
+                    {
+                        //how much of our velocity aligns with surface normal?
+                        var projection = Vector2.Dot(velocity, currentNormal);
+                        //slower velocity if moving against the normal (up a hill).
+                        if (projection < 0)
+                        {
+                            velocity -= projection * currentNormal;
+                        }
+                    }
+                    else
+                    {
+                        //We are airborne, but hit something, so cancel vertical up and horizontal velocity.
+                        velocity.x *= 0;
+                        velocity.y = Mathf.Min(velocity.y, 0);
+                    }
+                    //remove shellDistance from actual move distance.
+                    var modifiedDistance = hitInfo.distance - shellRadius;
+                    distance = modifiedDistance < distance ? modifiedDistance : distance;
+                }
+            }
+            body.position += move.normalized * distance;
+        }
+
         void UpdateJumpState()
         {
-            jump = false;
+            _jump = false;
             switch (jumpState)
             {
                 case JumpState.PrepareToJump:
                     jumpState = JumpState.Jumping;
-                    jump = true;
-                    stopJump = false;
+                    _jump = true;
+                    _stopJump = false;
                     break;
                 case JumpState.Jumping:
                     if (!IsGrounded)
@@ -155,29 +248,29 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
-            if (jump && IsGrounded)
+            if (_jump && IsGrounded)
             {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
-                jump = false;
+                _jump = false;
             }
-            else if (stopJump)
+            else if (_stopJump)
             {
-                stopJump = false;
+                _stopJump = false;
                 if (velocity.y > 0)
                 {
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
             }
 
-            if (move.x > 0.01f)
-                spriteRenderer.flipX = false;
-            else if (move.x < -0.01f)
-                spriteRenderer.flipX = true;
+            if (_move.x > 0.01f)
+                _spriteRenderer.flipX = false;
+            else if (_move.x < -0.01f)
+                _spriteRenderer.flipX = true;
 
-            animator.SetBool("grounded", IsGrounded);
-            animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+            _animator.SetBool("grounded", IsGrounded);
+            _animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
-            targetVelocity = move * maxSpeed;
+            targetVelocity = _move * maxSpeed;
         }
 
         public enum JumpState
