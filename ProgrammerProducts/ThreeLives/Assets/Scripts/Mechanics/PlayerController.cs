@@ -53,6 +53,7 @@ namespace Platformer.Mechanics
         bool _jump;
         bool _down;
         Vector2 _move;
+        Vector2 slipoffNormal;
         SpriteRenderer _spriteRenderer;
         internal Animator _animator;
         readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
@@ -75,6 +76,7 @@ namespace Platformer.Mechanics
             Collider2d = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
+            slipoffNormal = Vector2.right;
         }
 
         protected override void Update()
@@ -101,7 +103,7 @@ namespace Platformer.Mechanics
                 {
                     Transform seedTarget;
                     TransformOnTimeShift parentTransformNode = GroundCollider.GetComponentInParent<TransformOnTimeShift>();
-                    if(parentTransformNode != null)
+                    if(parentTransformNode != null && parentTransformNode.HoldPlantedObjects)
                     {
                         seedTarget = parentTransformNode.transform;
                     }
@@ -135,6 +137,7 @@ namespace Platformer.Mechanics
             {
                 if(!Collider2d.Distance(penetratingCollider).isOverlapped)
                 {
+                    //print("penetration exit:" + penetratingCollider.gameObject.transform.parent.name);
                     _penetratingColliders.Remove(penetratingCollider);
                 }
             }
@@ -148,6 +151,7 @@ namespace Platformer.Mechanics
                 IsGrounded = true;
                 GroundCollider = null;
                 groundNormal = Vector2.up;
+                slipoffNormal = Vector2.right;
             }
             else
             {
@@ -156,39 +160,52 @@ namespace Platformer.Mechanics
                 //if already falling, fall faster than the jump speed, otherwise use normal gravity.
                 if (velocity.y < 0)
                 {
-                    velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
-                    if(OnLadder && _down && velocity.y < -_maxClimbDownSpeed)
+                    var fallAlongWall = new Vector2(slipoffNormal.y, -slipoffNormal.x) * (slipoffNormal.x > 0 ? -1 : 1);
+                    Vector2 oldVelocity = velocity;
+                    velocity += fallAlongWall * gravityModifier * Physics2D.gravity.y * Time.deltaTime;
+                    //print("velocity " + oldVelocity.x + ", " + oldVelocity.y + " -> " + velocity.x + ", " + velocity.y);
+                    //print(fallAlongWall + " -> " + (fallAlongWall * gravityModifier * Physics2D.gravity.y));
+                    if (OnLadder && _down && velocity.y < -_maxClimbDownSpeed)
                     {
-                        velocity.y = -_maxClimbDownSpeed;
+                        velocity = new Vector2(velocity.x, -_maxClimbDownSpeed);
                     }
                 }
                 else
                     velocity += Physics2D.gravity * Time.deltaTime;
             }
 
-            velocity.x = targetVelocity.x;
-
+            bool slipoff = false;
+            if (slipoffNormal == Vector2.right || slipoffNormal.x * targetVelocity.x > 0)
+                velocity = new Vector2(targetVelocity.x, velocity.y);
+            else
+                slipoff = true;
 
             var deltaPosition = velocity * Time.deltaTime;
 
-            var moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
+            //print("deltaPosition " + deltaPosition.x + ", " + deltaPosition.y + " slipoff " + slipoff);
 
-            var xmove = moveAlongGround * deltaPosition.x;
+            slipoffNormal = Vector2.right;
+
+            Vector2 xmove;
+
+            if(slipoff)
+            {
+                xmove = Vector2.right * deltaPosition.x;
+            }
+            else
+            {
+                var moveAlongGround = new Vector2(groundNormal.y, -groundNormal.x);
+                xmove = moveAlongGround * deltaPosition.x;
+            }
+
             PerformMovement(xmove, false);
 
+            Vector2 ymove = Vector2.up * deltaPosition.y;
+            PerformMovement(ymove, true);
+            //print("xmove " + xmove.x + ", " + xmove.y + ", ymove " + ymove.x + ", " + ymove.y);
 
-            if (!IsGrounded || velocity.y > 0)
-            {
-                Vector2 ymove = Vector2.up * deltaPosition.y;
-                if (OnLadder)
-                {
-                    body.position += ymove;
-                }
-                else
-                {
-                    PerformMovement(ymove, true);
-                }
-            }
+            if (!IsGrounded)
+                groundNormal = Vector2.up;
         }
 
         public void RemoveAllPlantedObjects()
@@ -216,11 +233,12 @@ namespace Platformer.Mechanics
                     if (hitInfo.collider.GetType() == typeof(EdgeCollider2D))
                     {   
                         if (
-                            move.y >= 0 //penetrate edge collider ceilings while jumping
+                            move.y > 0 //penetrate edge collider ceilings while jumping
                             || OnLadder && _down //penetrate edge coolider grounds while climb down ladders
                             )
                         {
                             //remember those colliders should be ignored while overlapping
+                            //print("penetraing:" + hitInfo.collider.gameObject.transform.parent.name);
                             _penetratingColliders.Add(hitInfo.collider);
                             continue;
                         }
@@ -237,9 +255,9 @@ namespace Platformer.Mechanics
                         groundNormal = currentNormal;
                         currentNormal.x = 0;
                     }
-                    else
+                    else if (!IsGrounded && currentNormal.y > slipoffNormal.y)
                     {
-                        //print(currentNormal.y + " smaller " + minGroundNormalY);
+                        slipoffNormal = currentNormal;
                     }
                     if (IsGrounded)
                     {
@@ -254,15 +272,24 @@ namespace Platformer.Mechanics
                     else
                     {
                         //We are airborne, but hit something, so cancel vertical up and horizontal velocity.
-                        velocity.x *= 0;
-                        velocity.y = Mathf.Min(velocity.y, 0);
+                        velocity = new Vector2(velocity.x, Mathf.Min(velocity.y, 0));
                     }
                     //remove shellDistance from actual move distance.
                     var modifiedDistance = hitInfo.distance - shellRadius;
+                    if (modifiedDistance <= 0)
+                    {
+                        distance = move.magnitude;
+                        move = currentNormal;
+                        break;
+                    }
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
                 }
             }
+            Vector2 delta = move.normalized * distance;
+            if (OnLadder && !_down && move.y < 0)
+                move.y = 0;
             body.position += move.normalized * distance;
+            //print("delta: " + delta.x + " " + delta.y + " distance " + distance + " move " + move.x + ", " + move.y);
         }
 
         void UpdateJumpState()
@@ -299,7 +326,7 @@ namespace Platformer.Mechanics
         {
             if (_jump && IsGrounded)
             {
-                velocity.y = jumpTakeOffSpeed * model.jumpModifier;
+                velocity = new Vector2(velocity.x, jumpTakeOffSpeed * model.jumpModifier);
                 _jump = false;
             }
             else if (_stopJump)
@@ -307,7 +334,7 @@ namespace Platformer.Mechanics
                 _stopJump = false;
                 if (velocity.y > 0)
                 {
-                    velocity.y = velocity.y * model.jumpDeceleration;
+                    velocity = new Vector2(velocity.x, velocity.y * model.jumpDeceleration);
                 }
             }
 

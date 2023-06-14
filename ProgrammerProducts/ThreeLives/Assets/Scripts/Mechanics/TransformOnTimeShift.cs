@@ -9,9 +9,13 @@ namespace Platformer.Mechanics
     public class TransformOnTimeShift : MonoBehaviour
     {
         [SerializeField]
+        bool _holdPlantedObjects = true;
+        [SerializeField]
         GameObject _pastForm, _currentForm;
         [SerializeField]
         UnityEvent _onPast, _onCurrent;
+
+        public bool HoldPlantedObjects => _holdPlantedObjects;
         private void Start()
         {
             WorldManager.Instannce.onShiftTime.AddListener(() => TransformByTimeline());
