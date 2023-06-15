@@ -2023,6 +2023,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sky
       objectReference: {fileID: 0}
+    - target: {fileID: 7815826568005171926, guid: ec622612ab0c73d4abfb29b8fc1e4a10,
+        type: 3}
+      propertyPath: m_TranslationOffset.x
+      value: 3.4911084
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815826568005171926, guid: ec622612ab0c73d4abfb29b8fc1e4a10,
+        type: 3}
+      propertyPath: m_TranslationOffset.y
+      value: 1.7817605
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815826568005171926, guid: ec622612ab0c73d4abfb29b8fc1e4a10,
+        type: 3}
+      propertyPath: m_TranslationOffset.z
+      value: 9.698242
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815826568005171926, guid: ec622612ab0c73d4abfb29b8fc1e4a10,
+        type: 3}
+      propertyPath: m_Sources.Array.data[0].sourceTransform
+      value: 
+      objectReference: {fileID: 519420032}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec622612ab0c73d4abfb29b8fc1e4a10, type: 3}
 --- !u!4 &1232231522 stripped
