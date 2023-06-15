@@ -115,6 +115,7 @@ namespace Platformer.Mechanics
                     }
                     Vine vine = Instantiate(_vineSeedPrefab, seedTarget);
                     vine.transform.position = transform.position;
+                    vine.transform.localScale = new Vector3(1 / vine.transform.parent.lossyScale.x, 1 / vine.transform.parent.lossyScale.y, 1 / vine.transform.parent.lossyScale.z);
                     WorldManager.Instannce.PlayOneShotSound(_plantAudio);
                     _plantedObjects.Add(vine);
                 }
