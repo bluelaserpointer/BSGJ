@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4084455606004679996}
   - component: {fileID: 4084455606004679999}
-  - component: {fileID: 7815826568005171926}
   m_Layer: 0
   m_Name: Sky
   m_TagString: Untagged
@@ -56,25 +55,6 @@ MonoBehaviour:
   _onCurrent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1818360608 &7815826568005171926
-PositionConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4084455606004679997}
-  m_Enabled: 1
-  m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0, z: 0}
-  m_TranslationOffset: {x: 3.4911094, y: 0.16000092, z: 9.698242}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_IsContraintActive: 1
-  m_IsLocked: 0
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 1
 --- !u!1 &4084455606576147595
 GameObject:
   m_ObjectHideFlags: 0

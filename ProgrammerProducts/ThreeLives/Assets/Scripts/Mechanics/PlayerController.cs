@@ -219,6 +219,7 @@ namespace Platformer.Mechanics
                 Destroy(plant.gameObject);
             }
         }
+
         protected override void PerformMovement(Vector2 move, bool yMovement)
         {
             var distance = move.magnitude;
