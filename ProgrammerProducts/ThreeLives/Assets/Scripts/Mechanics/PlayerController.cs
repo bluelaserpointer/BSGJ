@@ -235,7 +235,7 @@ namespace Platformer.Mechanics
                         continue;
                     if (_penetratingColliders.Contains(hitInfo.collider))
                         continue;
-                    if (hitInfo.collider.GetType() == typeof(EdgeCollider2D))
+                    if (hitInfo.collider.GetType() == typeof(EdgeCollider2D) || (hitInfo.collider.GetComponent<Wall>()?.penetratable ?? false))
                     {   
                         if (
                             move.y > 0 //penetrate edge collider ceilings while jumping
