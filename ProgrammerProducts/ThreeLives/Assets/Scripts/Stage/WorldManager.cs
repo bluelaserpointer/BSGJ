@@ -40,6 +40,13 @@ public class WorldManager : MonoBehaviour
         Instannce = this;
         SetTimeline(defaultTimeline, true);
     }
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
     public void SetTimeline(Timeline timeline, bool initalizing = false)
     {
         if (!initalizing)
