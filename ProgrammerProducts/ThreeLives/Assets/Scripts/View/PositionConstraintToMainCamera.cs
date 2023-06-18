@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PositionConstraintToMainCamera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool constraintX, constraintY, constraintZ;
+    public new Camera camera;
 
-    // Update is called once per frame
-    void Update()
+    Vector3 offset;
+
+    private void Awake()
     {
-        
+        camera = Camera.main;
+        offset = camera.transform.position - transform.position;
+    }
+    private void LateUpdate()
+    {
+        transform.position = camera.transform.position + offset;
     }
 }
