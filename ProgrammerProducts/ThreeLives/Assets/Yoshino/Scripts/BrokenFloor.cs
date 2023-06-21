@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class BrokenFloor : MonoBehaviour
 {
-    [SerializeField] private float durability = 4;
+    [SerializeField] private float durability = 3;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.rigidbody.velocity.magnitude >= durability)  
+        Debug.Log(collision.rigidbody.velocity.magnitude);
+        if (collision.rigidbody.velocity.magnitude >= durability)   
         {
             Destroy(this.gameObject);
         }

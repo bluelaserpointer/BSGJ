@@ -8,6 +8,7 @@ using UnityEngine;
 public class PushObject : MonoBehaviour
 {
     GameObject player;
+    Rigidbody2D rb;
     GameObject block;
     GameObject childBlock;
     bool isMoving = false;
@@ -16,10 +17,13 @@ public class PushObject : MonoBehaviour
     [SerializeField]
     float limitedSpeed = 1;
     float tmpSpeed;
+    float defaultGravity;
     // Start is called before the first frame update
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
+        rb = GetComponent<Rigidbody2D>();
+        defaultGravity = rb.gravityScale;
         defaultPos = transform.position;
         block = transform.gameObject;
         childBlock = transform.GetChild(0).gameObject;
@@ -32,7 +36,9 @@ public class PushObject : MonoBehaviour
             //childBlock.GetComponent<BoxCollider2D>().enabled = false;
             childBlock.GetComponent<CircleCollider2D>().enabled = false;
             //block.GetComponent<Rigidbody2D>().gravityScale = 0;
-            childBlock.GetComponent<Rigidbody2D>().gravityScale = 0;
+            //childBlock.GetComponent<Rigidbody2D>().gravityScale = 0;
+            rb.gravityScale = 0;
+            rb.velocity = Vector2.zero;
             // ÉWÉÉÉìÉvÇ∑ÇÈÇ∆âèú
             if (0.1 < offsetPos.y - transform.position.y + player.transform.position.y)
             {
@@ -43,13 +49,18 @@ public class PushObject : MonoBehaviour
             Vector3 pos = player.transform.position + offsetPos;
             pos.y = defaultPos.y;
             transform.position = pos;
+
+
+
         }
         else
         {
+            defaultPos = transform.position;
             //childBlock.GetComponent<BoxCollider2D>().enabled = true;
             childBlock.GetComponent<CircleCollider2D>().enabled = true;
             //block.GetComponent<Rigidbody2D>().gravityScale = 1;
-            childBlock.GetComponent<Rigidbody2D>().gravityScale = 1;
+            //childBlock.GetComponent<Rigidbody2D>().gravityScale = 1;
+            rb.gravityScale = defaultGravity;
         }
     }
     public void MoveWithPlayer()
