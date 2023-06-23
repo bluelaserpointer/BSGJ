@@ -100,7 +100,14 @@ namespace Platformer.Mechanics
         {
             base.Start();
             slipoffNormal = Vector2.right;
-            SelectedItemIndex = -1;
+            if(avaliableItemsIndex.Count > 0)
+            {
+                SelectedItemIndex = avaliableItemsIndex[0];
+            }
+            else
+            {
+                SelectedItemIndex = -1;
+            }
         }
 
         protected override void Update()
