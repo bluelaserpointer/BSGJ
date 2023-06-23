@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1208144871472054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.14, y: 3.39, z: 1}
-  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,10 +62,10 @@ MonoBehaviour:
   controlEnabled: 1
   maxSpeed: 3
   _maxClimbDownSpeed: 5
-  jumpTakeOffSpeed: 7
+  jumpTakeOffSpeed: 3
   jumpState: 0
   avaliableInteractable: {fileID: 0}
-  _onLadderCount: 0
+  onLadderCount: 0
 --- !u!212 &212064061491315838
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ SpriteRenderer:
   m_SortingLayerID: 1907945055
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 836016449, guid: e35f476a7101c43c2926d3dac426f026, type: 3}
+  m_Sprite: {fileID: -862927673, guid: e9269f5d55c0c4890b77bd9e29236d14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -179,7 +179,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.62447214
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

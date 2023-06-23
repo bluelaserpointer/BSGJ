@@ -62,15 +62,15 @@ public class BlockMove : MonoBehaviour
         offsetPos = transform.position - player.transform.position;
     }
 
-    PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+    PlatformerModel Model => Simulation.GetModel<PlatformerModel>();
     void OnTriggerEnter2D(Collider2D collider)
     {
         var p = collider.gameObject.GetComponent<Platformer.Mechanics.PlayerController>();
         if (p != null)
         {
             // blockを押してる間、プレイヤーの速度を下げる
-            tmpSpeed = model.player.maxSpeed;
-            model.player.maxSpeed = limitedSpeed;
+            tmpSpeed = Model.Player.maxSpeed;
+            Model.Player.maxSpeed = limitedSpeed;
         }
     }
     void OnTriggerExit2D(Collider2D collider)
@@ -79,7 +79,7 @@ public class BlockMove : MonoBehaviour
         if (p != null)
         {
             // プレイヤーの速度を戻す
-            model.player.maxSpeed = tmpSpeed;
+            Model.Player.maxSpeed = tmpSpeed;
         }
     }
 }

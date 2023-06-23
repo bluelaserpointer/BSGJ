@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813bae9b9028bce4fb9856699f4f301d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fixedAngle: {x: 0, y: 0, z: 0, w: 1}
+  _transformer: {fileID: 5579899354043750750}
 --- !u!114 &5579899354043750750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,8 +60,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e92798617a12c547b665dbebe969349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holdPlantedObjects: 1
   _pastForm: {fileID: 5579899354827178442}
   _currentForm: {fileID: 7486940655961192188}
+  _onPast:
+    m_PersistentCalls:
+      m_Calls: []
+  _onCurrent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5579899354827178442
 GameObject:
   m_ObjectHideFlags: 0

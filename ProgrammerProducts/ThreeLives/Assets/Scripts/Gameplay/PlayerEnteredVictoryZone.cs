@@ -14,13 +14,12 @@ namespace Platformer.Gameplay
     {
         public VictoryZone victoryZone;
 
-        PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-
         public override void Execute()
         {
+            PlatformerModel model = Simulation.GetModel<PlatformerModel>();
             //model.player.animator.SetTrigger("victory"); //TODO: new scene load animation
-            model.player.controlEnabled = false;
-            WorldManager.Instannce.LoadNewScene(victoryZone.nextSceneName);
+            model.Player.controlEnabled = false;
+            WorldManager.Instance.LoadNewScene(victoryZone.nextSceneName);
         }
     }
 }

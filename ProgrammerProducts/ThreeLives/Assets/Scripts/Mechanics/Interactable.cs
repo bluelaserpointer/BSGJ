@@ -15,8 +15,7 @@ namespace Platformer.Mechanics
         GameObject _stepInActiveObj;
         public UnityEvent OnInteract, OnInteractStay, OnStepIn, OnStepOut;
 
-        private PlatformerModel _platformerModel = Simulation.GetModel<PlatformerModel>();
-        PlayerController Player => _platformerModel.player;
+        PlayerController Player => PlayerController.Instance;
         protected virtual void Awake()
         {
             if (_stepInActiveObj != null)

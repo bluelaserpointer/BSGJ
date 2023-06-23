@@ -16,10 +16,9 @@ namespace Platformer.Gameplay
         public EnemyController enemy;
         public PlayerController player;
 
-        PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-
         public override void Execute()
         {
+            PlatformerModel model = Simulation.GetModel<PlatformerModel>();
             var willHurtEnemy = player.Bounds.center.y >= enemy.Bounds.max.y;
 
             if (willHurtEnemy)

@@ -15,6 +15,8 @@ namespace Platformer.Mechanics
     /// </summary>
     public class PlayerController : KinematicObject
     {
+        public static PlayerController Instance { get; private set; }
+
         //Inspector
         [Header("SE")]
         public AudioClip jumpAudio;
@@ -25,7 +27,8 @@ namespace Platformer.Mechanics
 
         [Header("Ability")]
         [SerializeField]
-        Vine _vineSeedPrefab;
+        PlantedVine _vineSeedPrefab;
+        public List<int> avaliableItemsIndex = new List<int>(); 
         [Header("Mobility")]
         public bool controlEnabled = true;
         /// <summary>
@@ -51,6 +54,19 @@ namespace Platformer.Mechanics
         public Health Health { get; private set; }
         public AudioSource AudioSource { get; private set; }
 
+        public int SelectedItemIndex
+        {
+            get => _selectedItemIndex;
+            set
+            {
+                if (value != -1 && !avaliableItemsIndex.Contains(value))
+                    return;
+                _selectedItemIndex = value;
+                WorldManager.Instance.GameUI.ItemBar.OnSelectedItem(value);
+            }
+        }
+        int _selectedItemIndex;
+
         private bool _stopJump;
         bool _jump;
         bool _down;
@@ -58,14 +74,14 @@ namespace Platformer.Mechanics
         Vector2 slipoffNormal;
         SpriteRenderer _spriteRenderer;
         internal Animator _animator;
-        readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        PlatformerModel Model => Simulation.GetModel<PlatformerModel>();
 
         [HideInInspector]
         public Interactable avaliableInteractable;
 
         [HideInInspector]
-        public int _onLadderCount;
-        public bool OnLadder => _onLadderCount > 0;
+        public int onLadderCount;
+        public bool OnLadder => onLadderCount > 0;
         List<Collider2D> _penetratingColliders = new List<Collider2D>();
 
         List<PlantableObject> _plantedObjects = new List<PlantableObject>();
@@ -73,12 +89,18 @@ namespace Platformer.Mechanics
 
         void Awake()
         {
+            Instance = this;
             Health = GetComponent<Health>();
             AudioSource = GetComponent<AudioSource>();
             Collider2d = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
+        }
+        protected override void Start()
+        {
+            base.Start();
             slipoffNormal = Vector2.right;
+            SelectedItemIndex = -1;
         }
 
         protected override void Update()
@@ -91,15 +113,31 @@ namespace Platformer.Mechanics
             {
                 avaliableInteractable?.OnInteractStay.Invoke();
             }
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                SelectedItemIndex = 0;
+            }
+            else if (Input.GetKey(KeyCode.Alpha2))
+            {
+                SelectedItemIndex = 1;
+            }
+            else if (Input.GetKey(KeyCode.Alpha3))
+            {
+                SelectedItemIndex = 2;
+            }
+            else if (Input.GetKey(KeyCode.Tab))
+            {
+                int index = avaliableItemsIndex.IndexOf(SelectedItemIndex);
+                if (index != -1)
+                {
+                    SelectedItemIndex = avaliableItemsIndex[(index + 1) % avaliableItemsIndex.Count];
+                }
+            }
             if (Input.GetKeyDown(KeyCode.F))
             {
                 if(!GroundCollider)
                 {
                     //cannot plant in this position
-                }
-                else if (WorldManager.Instannce.Timeline == Timeline.Current)
-                {
-                    //prevent plant action in current time
                 }
                 else
                 {
@@ -113,10 +151,10 @@ namespace Platformer.Mechanics
                     {
                         seedTarget = GroundCollider.transform;
                     }
-                    Vine vine = Instantiate(_vineSeedPrefab, seedTarget);
+                    PlantedVine vine = Instantiate(_vineSeedPrefab, seedTarget);
                     vine.transform.position = transform.position;
                     vine.transform.localScale = new Vector3(1 / vine.transform.parent.lossyScale.x, 1 / vine.transform.parent.lossyScale.y, 1 / vine.transform.parent.lossyScale.z);
-                    WorldManager.Instannce.PlayOneShotSound(_plantAudio);
+                    WorldManager.Instance.PlayOneShotSound(_plantAudio);
                     _plantedObjects.Add(vine);
                 }
             }
@@ -331,7 +369,7 @@ namespace Platformer.Mechanics
         {
             if (_jump && IsGrounded)
             {
-                velocity = new Vector2(velocity.x, jumpTakeOffSpeed * model.jumpModifier);
+                velocity = new Vector2(velocity.x, jumpTakeOffSpeed * Model.jumpModifier);
                 _jump = false;
             }
             else if (_stopJump)
@@ -339,7 +377,7 @@ namespace Platformer.Mechanics
                 _stopJump = false;
                 if (velocity.y > 0)
                 {
-                    velocity = new Vector2(velocity.x, velocity.y * model.jumpDeceleration);
+                    velocity = new Vector2(velocity.x, velocity.y * Model.jumpDeceleration);
                 }
             }
 

@@ -9,11 +9,10 @@ namespace Platformer.Gameplay
     /// </summary>
     public class PlayerSpawn : Simulation.Event<PlayerSpawn>
     {
-        PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-
         public override void Execute()
         {
-            var player = model.player;
+            PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+            var player = model.Player;
             player.Collider2d.enabled = true;
             player.controlEnabled = false;
             if (player.AudioSource && player.respawnAudio)
