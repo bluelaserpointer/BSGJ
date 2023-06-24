@@ -9,7 +9,7 @@ public abstract class PlantableObject : MonoBehaviour
     [SerializeField]
     TransformOnTimeShift _transformer;
 
-    private void Awake()
+    private void Start()
     {
         if(WorldManager.Instance.Timeline == Timeline.Current)
         {
