@@ -133,7 +133,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9db7819406bc2754cafac149649f3aaa, type: 2}
+  m_Sprite: {fileID: 21300000, guid: 86ac07a006fde074aada232465b43e70, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -915,7 +915,7 @@ GameObject:
   - component: {fileID: 4471191811899256452}
   - component: {fileID: 3017549395491963860}
   m_Layer: 5
-  m_Name: '"Esc"'
+  m_Name: '"Q"'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1746,7 +1746,7 @@ GameObject:
   - component: {fileID: 9191152743220264514}
   - component: {fileID: 9191152743220264515}
   m_Layer: 5
-  m_Name: '"Esc"'
+  m_Name: '"R"'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1881,7 +1881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9db7819406bc2754cafac149649f3aaa, type: 2}
+  m_Sprite: {fileID: 21300000, guid: d0938ae23f04de943bcea0a5f625811a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
