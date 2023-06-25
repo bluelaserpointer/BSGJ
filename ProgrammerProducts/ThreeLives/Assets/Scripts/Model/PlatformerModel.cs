@@ -20,7 +20,7 @@ namespace Platformer.Model
         /// The main component which controls the player sprite, controlled 
         /// by the user.
         /// </summary>
-        public PlayerController player;
+        public PlayerController Player => PlayerController.Instance;
 
         /// <summary>
         /// The spawn point in the scene.

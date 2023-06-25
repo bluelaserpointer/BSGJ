@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5579899354043750751}
+  - component: {fileID: 4926947861819886457}
   - component: {fileID: 5579899354043750750}
   m_Layer: 0
   m_Name: VineTimeshift
@@ -34,6 +35,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4926947861819886457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5579899354043750720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813bae9b9028bce4fb9856699f4f301d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transformer: {fileID: 5579899354043750750}
 --- !u!114 &5579899354043750750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,8 +60,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e92798617a12c547b665dbebe969349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _holdPlantedObjects: 1
   _pastForm: {fileID: 5579899354827178442}
   _currentForm: {fileID: 7486940655961192188}
+  _onPast:
+    m_PersistentCalls:
+      m_Calls: []
+  _onCurrent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5579899354827178442
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,7 +94,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5579899354827178442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.78, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -152,7 +173,7 @@ PrefabInstance:
     - target: {fileID: 3065047256730282952, guid: aa199fa7c4182eb448ed8a987144838a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.78
       objectReference: {fileID: 0}
     - target: {fileID: 3065047256730282952, guid: aa199fa7c4182eb448ed8a987144838a,
         type: 3}

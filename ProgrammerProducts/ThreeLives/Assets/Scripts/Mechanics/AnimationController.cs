@@ -38,7 +38,7 @@ namespace Platformer.Mechanics
 
         SpriteRenderer spriteRenderer;
         Animator animator;
-        PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        PlatformerModel Model => Simulation.GetModel<PlatformerModel>();
 
         protected virtual void Awake()
         {
@@ -50,7 +50,7 @@ namespace Platformer.Mechanics
         {
             if (jump && IsGrounded)
             {
-                velocity.y = jumpTakeOffSpeed * model.jumpModifier;
+                velocity.y = jumpTakeOffSpeed * Model.jumpModifier;
                 jump = false;
             }
             else if (stopJump)
@@ -58,7 +58,7 @@ namespace Platformer.Mechanics
                 stopJump = false;
                 if (velocity.y > 0)
                 {
-                    velocity.y = velocity.y * model.jumpDeceleration;
+                    velocity.y = velocity.y * Model.jumpDeceleration;
                 }
             }
 

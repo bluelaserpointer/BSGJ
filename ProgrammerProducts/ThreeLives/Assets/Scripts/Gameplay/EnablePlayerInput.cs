@@ -8,11 +8,9 @@ namespace Platformer.Gameplay
     /// </summary>
     public class EnablePlayerInput : Simulation.Event<EnablePlayerInput>
     {
-        PlatformerModel model = Simulation.GetModel<PlatformerModel>();
-
         public override void Execute()
         {
-            var player = model.player;
+            var player = Simulation.GetModel<PlatformerModel>().Player;
             player.controlEnabled = true;
         }
     }

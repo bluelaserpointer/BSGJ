@@ -1,6 +1,7 @@
 using Platformer.Core;
 using Platformer.Mechanics;
 using Platformer.Model;
+using Platformer.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class WorldManager : MonoBehaviour
     Camera _camera;
     [SerializeField]
     Timeline defaultTimeline = Timeline.Past;
+    [SerializeField]
+    GameUI _gameUI;
 
     [Header("SE")]
     [SerializeField]
@@ -29,16 +32,17 @@ public class WorldManager : MonoBehaviour
         onShiftPastTime = new UnityEvent(),
         onShiftCurrentTime = new UnityEvent();
 
-    public static WorldManager Instannce { get; private set; }
+    public static WorldManager Instance { get; private set; }
+    public GameUI GameUI => _gameUI;
     public Timeline Timeline { get; private set; }
-
-    PlatformerModel _platformerModel = Simulation.GetModel<PlatformerModel>();
-    public static PlayerController PlayerController => Instannce._platformerModel.player;
 
     private void Awake()
     {
-        Instannce = this;
+        Instance = this;
         SetTimeline(defaultTimeline, true);
+    }
+    private void Update()
+    {
     }
     public void SetTimeline(Timeline timeline, bool initalizing = false)
     {
@@ -67,6 +71,6 @@ public class WorldManager : MonoBehaviour
     }
     public void PlayOneShotSound(AudioClip clip)
     {
-        PlayerController.AudioSource.PlayOneShot(clip);
+        PlayerController.Instance.AudioSource.PlayOneShot(clip);
     }
 }

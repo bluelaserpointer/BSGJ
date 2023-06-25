@@ -8,25 +8,35 @@ namespace Platformer.Mechanics
     [DisallowMultipleComponent]
     public class TransformOnTimeShift : MonoBehaviour
     {
-        [SerializeField]
-        GameObject _pastForm, _currentForm;
+        public bool _holdPlantedObjects = true;
+        public GameObject _pastForm, _currentForm;
+        public UnityEvent _onPast, _onCurrent;
 
+        public bool HoldPlantedObjects => _holdPlantedObjects;
         private void Start()
         {
-            WorldManager.Instannce.onShiftTime.AddListener(() => TransformByTimeline());
+            WorldManager.Instance.onShiftTime.AddListener(() => TransformByTimeline());
             TransformByTimeline();
         }
         public void TransformByTimeline()
         {
-            switch (WorldManager.Instannce.Timeline)
+            if(!gameObject.activeInHierarchy)
+                return;
+            switch (WorldManager.Instance.Timeline)
             {
                 case Timeline.Past:
-                    _pastForm?.SetActive(true);
-                    _currentForm?.SetActive(false);
+                    if(_pastForm != null)
+                        _pastForm.SetActive(true);
+                    if (_currentForm != null)
+                        _currentForm.SetActive(false);
+                    _onPast.Invoke();
                     break;
                 case Timeline.Current:
-                    _pastForm?.SetActive(false);
-                    _currentForm?.SetActive(true);
+                    if (_pastForm != null)
+                        _pastForm.SetActive(false);
+                    if (_currentForm != null)
+                        _currentForm.SetActive(true);
+                    _onCurrent.Invoke();
                     break;
             }
         }

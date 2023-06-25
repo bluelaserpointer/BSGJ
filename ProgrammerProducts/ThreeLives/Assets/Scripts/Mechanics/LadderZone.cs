@@ -9,13 +9,12 @@ namespace Platformer.Mechanics
     /// </summary>
     public class LadderZone : MonoBehaviour
     {
-        PlatformerModel model = Simulation.GetModel<PlatformerModel>();
         void OnTriggerEnter2D(Collider2D collider)
         {
             var p = collider.gameObject.GetComponent<PlayerController>();
             if (p != null)
             {
-                ++model.player._onLadderCount;
+                ++PlayerController.Instance.onLadderCount;
             }
         }
         void OnTriggerExit2D(Collider2D collider)
@@ -23,7 +22,7 @@ namespace Platformer.Mechanics
             var p = collider.gameObject.GetComponent<PlayerController>();
             if (p != null)
             {
-                --model.player._onLadderCount;
+                --PlayerController.Instance.onLadderCount;
             }
         }
     }
