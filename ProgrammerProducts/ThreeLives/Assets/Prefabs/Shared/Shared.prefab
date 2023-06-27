@@ -282,7 +282,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7785388, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -530,7 +530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056451901760260296}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.4868937, y: -1.7817608, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -791,6 +791,7 @@ MonoBehaviour:
   _camera: {fileID: 2056451901760260299}
   defaultTimeline: 1
   _gameUI: {fileID: 43015513203403874}
+  _timeShiftTransition: {fileID: 6897426590013916452}
   _timeshiftSE: {fileID: 8300000, guid: 6c8bc7d093ab6f74388dd4e06c797d55, type: 3}
 --- !u!114 &2056451901899534965
 MonoBehaviour:
@@ -3148,6 +3149,18 @@ PrefabInstance:
       objectReference: {fileID: 2056451901760260299}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a73c5598fd6d43e38cde09d98deb938, type: 3}
+--- !u!114 &6897426590013916452 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5864034954100820967, guid: 3a73c5598fd6d43e38cde09d98deb938,
+    type: 3}
+  m_PrefabInstance: {fileID: 1070071414871707331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1098fa73d6bc4edf809301dab69880c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6897426590013916636 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5864034954100820767, guid: 3a73c5598fd6d43e38cde09d98deb938,
