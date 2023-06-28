@@ -76,8 +76,9 @@ public class PushObject : MonoBehaviour
         if (p != null)
         {
             // blockを押してる間、プレイヤーの速度を下げる
-            tmpSpeed = model.player.maxSpeed;
-            model.player.maxSpeed = limitedSpeed;
+            tmpSpeed = model.Player.maxSpeed;
+            
+            model.Player.maxSpeed = limitedSpeed;
         }
     }
     void OnTriggerExit2D(Collider2D collider)
@@ -86,7 +87,7 @@ public class PushObject : MonoBehaviour
         if (p != null)
         {
             // プレイヤーの速度を戻す
-            model.player.maxSpeed = tmpSpeed;
+            model.Player.maxSpeed = tmpSpeed;
         }
     }
 }

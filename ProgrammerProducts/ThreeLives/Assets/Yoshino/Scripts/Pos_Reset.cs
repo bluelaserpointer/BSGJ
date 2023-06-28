@@ -8,7 +8,7 @@ public class Pos_Reset : MonoBehaviour
     public void PosReset()
     {
         rb.velocity = Vector2.zero;
-        switch (WorldManager.Instannce.Timeline)
+        switch (WorldManager.Instance.Timeline)
         {
             case Timeline.Past:
                 //transform.position = pastPos;
