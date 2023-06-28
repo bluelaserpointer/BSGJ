@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    [SerializeField] float transitionSpeed = 1;
+    [SerializeField] float Speed = 1;
     [SerializeField] Image image;
 
     bool isMoving = false;
@@ -14,6 +14,7 @@ public class SceneTransition : MonoBehaviour
     Color startColor;
     Color endColor;
     string loadSceneName = "";
+    float transitionSpeed = 1;
 
     public static SceneTransition Instance { get; private set; }
     void Awake()
@@ -64,11 +65,15 @@ public class SceneTransition : MonoBehaviour
     {
         startColor = new Color(0f, 0f, 0f, 0f);
         endColor = new Color(0f, 0f, 0f, 1f);
+        transitionSpeed = Speed;
     }
     void FadeIn()
     {
         startColor = new Color(0f, 0f, 0f, 1f);
         endColor = new Color(0f, 0f, 0f, 0f);
+
+        // 体感だとInの速度が早く感じたので遅くしてます
+        transitionSpeed = Speed / 2;
     }
 
 }
