@@ -11,7 +11,7 @@ public class Flash : MonoBehaviour
     //プッシュ状態の画像
     [SerializeField] private Sprite Pushing;
     //プッシュ画像を表示する時間
-    [SerializeField] private　float PushingTime = 0.5f;
+    [SerializeField] private float PushingTime = 0.5f;
     //ボタンの状態
     [SerializeField] private bool button;
     //一度だけ押せるようにする
@@ -20,6 +20,8 @@ public class Flash : MonoBehaviour
     private SpriteRenderer sr;
     //経過時間
     private float elapsedTime = 0.0f;
+    //プッシュ中
+    private bool isPushing = false;
     //keepPushがtrueの時に、ボタンが押されたか
     private bool isPushed = false;
     void Start()
@@ -29,15 +31,17 @@ public class Flash : MonoBehaviour
 
     void Update()
     {
-        
+
         if (elapsedTime < PushingTime)
         {
             //プッシュ中の画像に切り替え
             sr.sprite = Pushing;
+            isPushing = true;
             //経過時間を計算
             elapsedTime += Time.deltaTime;
             return;
         }
+
         if (button)
         {
             sr.sprite = On;
@@ -46,6 +50,7 @@ public class Flash : MonoBehaviour
         {
             sr.sprite = Off;
         }
+        isPushing = false;
 
     }
     public void Flashing()
@@ -56,9 +61,11 @@ public class Flash : MonoBehaviour
             if (isPushed) return;
             isPushed = true;
         }
-       ;//経過時間をリセット
-        elapsedTime = 0.0f;
+        if (isPushing)
+            return;
         //トグル式のボタン
         button = button ? button = false : button = true;
+        //経過時間をリセット
+        elapsedTime = 0.0f;
     }
 }
