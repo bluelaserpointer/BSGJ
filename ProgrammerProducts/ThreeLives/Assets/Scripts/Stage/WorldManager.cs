@@ -70,7 +70,7 @@ public class WorldManager : MonoBehaviour
     {
         if (sceneName == "")
             return;
-        SceneManager.LoadScene(sceneName);
+        SceneTransition.Instance.LoadNextScene(sceneName);
     }
     public void PlayOneShotSound(AudioClip clip)
     {
