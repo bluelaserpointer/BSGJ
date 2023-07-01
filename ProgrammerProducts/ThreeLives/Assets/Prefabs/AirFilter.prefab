@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stepInActiveObj: {fileID: 0}
+  _rejectInteraction: 1
   OnInteract:
     m_PersistentCalls:
       m_Calls: []

@@ -59,6 +59,9 @@ MonoBehaviour:
   _plantAudio: {fileID: 8300000, guid: be1cabcf4be39b3418e310cd4df2f26e, type: 3}
   _vineSeedPrefab: {fileID: 4926947861819886457, guid: 3b73b0c224e72744b8d8bdc4487dff35,
     type: 3}
+  _frozenFlowerPrefab: {fileID: 3923521367722662612, guid: 768a0838fe95d0b439ded6733d6df068,
+    type: 3}
+  avaliableItemsIndex: 0000000001000000
   controlEnabled: 1
   maxSpeed: 3
   _maxClimbDownSpeed: 5

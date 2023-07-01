@@ -267,6 +267,7 @@ MonoBehaviour:
   _onCurrent:
     m_PersistentCalls:
       m_Calls: []
+  _preventTransform: 0
 --- !u!1001 &162898569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1434,6 +1435,7 @@ MonoBehaviour:
   _onCurrent:
     m_PersistentCalls:
       m_Calls: []
+  _preventTransform: 0
 --- !u!1 &901665978
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,6 +2284,7 @@ MonoBehaviour:
   _onCurrent:
     m_PersistentCalls:
       m_Calls: []
+  _preventTransform: 0
 --- !u!1001 &1482436602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2866,6 +2869,7 @@ MonoBehaviour:
   _onCurrent:
     m_PersistentCalls:
       m_Calls: []
+  _preventTransform: 0
 --- !u!224 &1987698609 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6801708930952817111, guid: 9d2dcee2c364caa4c8022b3a40728217,

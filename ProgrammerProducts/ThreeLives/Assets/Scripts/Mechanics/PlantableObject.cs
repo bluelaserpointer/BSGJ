@@ -11,11 +11,19 @@ public abstract class PlantableObject : MonoBehaviour
 
     private void Start()
     {
-        if(WorldManager.Instance.Timeline == Timeline.Current)
+        if(_transformer != null && WorldManager.Instance.Timeline == Timeline.Current)
         {
             _transformer._currentForm.SetActive(false);
             _transformer._currentForm = _transformer._pastForm;
             _transformer._pastForm = null;
         }
+    }
+    public virtual void PrepareDestroy()
+    {
+    }
+    public void Destroy()
+    {
+        PrepareDestroy();
+        Destroy(gameObject);
     }
 }

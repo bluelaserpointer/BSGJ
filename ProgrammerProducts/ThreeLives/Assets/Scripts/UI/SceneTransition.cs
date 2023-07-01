@@ -34,7 +34,6 @@ public class SceneTransition : MonoBehaviour
         if (isMoving)
         {
             float t = ((Time.unscaledTime - startTime) * transitionSpeed);
-            Debug.Log(t);
             image.color = Color.Lerp(startColor, endColor, t);
             if (t >= 1)
             {
