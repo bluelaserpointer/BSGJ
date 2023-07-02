@@ -61,6 +61,8 @@ MonoBehaviour:
     type: 3}
   _frozenFlowerPrefab: {fileID: 3923521367722662612, guid: 768a0838fe95d0b439ded6733d6df068,
     type: 3}
+  _plantRetrieverPrefab: {fileID: 3139648808736014552, guid: e7523e2dc27c2ea4a9b3e257d59fc3d2,
+    type: 3}
   avaliableItemsIndex: 0000000001000000
   controlEnabled: 1
   maxSpeed: 3

@@ -27,7 +27,12 @@ public class FrozenFlower : PlantableObject
     }
     public void FreezeTransform(bool cond)
     {
-        transformers.ForEach(transformer => transformer.PreventTransform = cond);
+        new List<TransformOnTimeShift>(transformers).ForEach(transformer => {
+            if (transformer != null)
+                transformer.PreventTransform = cond;
+            else
+                transformers.Remove(transformer);
+            });
     }
     public override void PrepareDestroy()
     {
