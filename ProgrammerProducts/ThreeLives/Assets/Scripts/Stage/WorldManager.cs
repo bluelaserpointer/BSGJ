@@ -22,6 +22,8 @@ public class WorldManager : MonoBehaviour
     Timeline defaultTimeline = Timeline.Past;
     [SerializeField]
     GameUI _gameUI;
+    [SerializeField]
+    TimeShiftTransition _timeShiftTransition;
 
     [Header("SE")]
     [SerializeField]
@@ -49,6 +51,7 @@ public class WorldManager : MonoBehaviour
         if (!initalizing)
         {
             PlayOneShotSound(_timeshiftSE);
+            _timeShiftTransition.ToTransition();
         }
         switch (Timeline = timeline)
         {

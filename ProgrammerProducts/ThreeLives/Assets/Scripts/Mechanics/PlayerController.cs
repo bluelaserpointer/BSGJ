@@ -28,6 +28,10 @@ namespace Platformer.Mechanics
         [Header("Ability")]
         [SerializeField]
         PlantedVine _vineSeedPrefab;
+        [SerializeField]
+        FrozenFlower _frozenFlowerPrefab;
+        [SerializeField]
+        PlantRetriever _plantRetrieverPrefab;
         public List<int> avaliableItemsIndex = new List<int>(); 
         [Header("Mobility")]
         public bool controlEnabled = true;
@@ -84,7 +88,8 @@ namespace Platformer.Mechanics
         public bool OnLadder => onLadderCount > 0;
         List<Collider2D> _penetratingColliders = new List<Collider2D>();
 
-        List<PlantableObject> _plantedObjects = new List<PlantableObject>();
+        Dictionary<int, PlantableObject> _idAndPlantedObject = new Dictionary<int, PlantableObject>();
+        Dictionary<int, bool> _idAndIsRetrieving = new Dictionary<int, bool>();
 
 
         void Awake()
@@ -95,6 +100,8 @@ namespace Platformer.Mechanics
             Collider2d = GetComponent<Collider2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
+            _idAndIsRetrieving[0] = false;
+            _idAndIsRetrieving[1] = false;
         }
         protected override void Start()
         {
@@ -142,12 +149,26 @@ namespace Platformer.Mechanics
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if(!GroundCollider)
+                if(_idAndIsRetrieving[SelectedItemIndex])
                 {
-                    //cannot plant in this position
+                    //cannnot plant until the seed is retreiving
+                }
+                else if(_idAndPlantedObject.TryGetValue(SelectedItemIndex, out PlantableObject oldPlant))
+                {
+                    //retrieve old plant before planting new one
+                    _idAndIsRetrieving[SelectedItemIndex] = true;
+                    PlantRetriever retriever = Instantiate(_plantRetrieverPrefab);
+                    retriever.transform.position = oldPlant.transform.position;
+                    retriever.Init(SelectedItemIndex);
+                    if (oldPlant != null)
+                    {
+                        oldPlant.Destroy();
+                    }
+                    _idAndPlantedObject.Remove(SelectedItemIndex);
                 }
                 else
                 {
+                    //plant new one
                     Transform seedTarget;
                     TransformOnTimeShift parentTransformNode = GroundCollider.GetComponentInParent<TransformOnTimeShift>();
                     if(parentTransformNode != null && parentTransformNode.HoldPlantedObjects)
@@ -158,11 +179,23 @@ namespace Platformer.Mechanics
                     {
                         seedTarget = GroundCollider.transform;
                     }
-                    PlantedVine vine = Instantiate(_vineSeedPrefab, seedTarget);
-                    vine.transform.position = transform.position;
-                    vine.transform.localScale = new Vector3(1 / vine.transform.parent.lossyScale.x, 1 / vine.transform.parent.lossyScale.y, 1 / vine.transform.parent.lossyScale.z);
+                    PlantableObject plant = null;
+                    switch (SelectedItemIndex)
+                    {
+                        case 0:
+                            plant = Instantiate(_vineSeedPrefab, seedTarget);
+                            break;
+                        case 1:
+                            plant = Instantiate(_frozenFlowerPrefab, seedTarget);
+                            break;
+                        default:
+                            print("<!> illegal plant index");
+                            break;
+                    }
+                    plant.transform.position = transform.position;
+                    plant.transform.localScale = new Vector3(1 / plant.transform.parent.lossyScale.x, 1 / plant.transform.parent.lossyScale.y, 1 / plant.transform.parent.lossyScale.z);
                     WorldManager.Instance.PlayOneShotSound(_plantAudio);
-                    _plantedObjects.Add(vine);
+                    _idAndPlantedObject.Add(SelectedItemIndex, plant);
                 }
             }
             if (controlEnabled)
@@ -256,15 +289,19 @@ namespace Platformer.Mechanics
             if (!IsGrounded)
                 groundNormal = Vector2.up;
         }
-
         public void RemoveAllPlantedObjects()
         {
-            foreach(var plant in _plantedObjects)
+            foreach(var idAndPlant in _idAndPlantedObject)
             {
-                Destroy(plant.gameObject);
+                if(idAndPlant.Value != null)
+                    Destroy(idAndPlant.Value.gameObject);
             }
+            _idAndPlantedObject.Clear();
         }
-
+        public void OnRetrievedPlant(int plantId)
+        {
+            _idAndIsRetrieving[plantId] = false;
+        }
         protected override void PerformMovement(Vector2 move, bool yMovement)
         {
             var distance = move.magnitude;

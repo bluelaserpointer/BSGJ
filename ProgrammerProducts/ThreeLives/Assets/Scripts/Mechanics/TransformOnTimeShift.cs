@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,40 @@ namespace Platformer.Mechanics
         public UnityEvent _onPast, _onCurrent;
 
         public bool HoldPlantedObjects => _holdPlantedObjects;
+        public bool PreventTransform
+        {
+            get => _preventTransform;
+            set
+            {
+                if(_preventTransform != value)
+                {
+                    bool oldValue = _preventTransform;
+                    _preventTransform = value;
+                    if(value)
+                    {
+                        foreach(SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+                        {
+                            renderer.GetOrAddComponent<FrozenMarker>();
+                        }
+                    }
+                    else
+                    {
+                        foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+                        {
+                            if(renderer.TryGetComponent(out FrozenMarker marker))
+                            {
+                                Destroy(marker);
+                            }
+                        }
+                    }
+                    if (oldValue && FreezingTransform) {
+                        TransformByTimeline();
+                    }
+                }
+            }
+        }
+        public bool _preventTransform;
+        public bool FreezingTransform { get; private set; }
         private void Start()
         {
             WorldManager.Instance.onShiftTime.AddListener(() => TransformByTimeline());
@@ -22,6 +57,12 @@ namespace Platformer.Mechanics
         {
             if(!gameObject.activeInHierarchy)
                 return;
+            if (PreventTransform)
+            {
+                FreezingTransform = !FreezingTransform;
+                return;
+            }
+            FreezingTransform = false;
             switch (WorldManager.Instance.Timeline)
             {
                 case Timeline.Past:

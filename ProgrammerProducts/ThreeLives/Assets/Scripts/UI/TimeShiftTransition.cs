@@ -21,12 +21,6 @@ public class TimeShiftTransition : MonoBehaviour
     float startTime;
     bool isMoving = false;
 
-
-    void Start()
-    {
-        WorldManager.Instance.onShiftTime.AddListener(() => ToTransition());
-    }
-
     void Update() // ワイプ動作
     {
         if (isMoving)

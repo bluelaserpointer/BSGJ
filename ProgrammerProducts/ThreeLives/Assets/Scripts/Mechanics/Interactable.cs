@@ -13,6 +13,8 @@ namespace Platformer.Mechanics
     {
         [SerializeField]
         GameObject _stepInActiveObj;
+        [SerializeField]
+        bool _rejectInteraction;
         public UnityEvent OnInteract, OnInteractStay, OnStepIn, OnStepOut;
 
         PlayerController Player => PlayerController.Instance;
@@ -28,7 +30,10 @@ namespace Platformer.Mechanics
             {
                 if(_stepInActiveObj != null)
                     _stepInActiveObj.SetActive(true);
-                Player.avaliableInteractable = this;
+                if(!_rejectInteraction)
+                {
+                    Player.avaliableInteractable = this;
+                }
                 OnStepIn.Invoke();
             }
         }
@@ -39,7 +44,8 @@ namespace Platformer.Mechanics
             {
                 if (_stepInActiveObj != null)
                     _stepInActiveObj.SetActive(false);
-                Player.avaliableInteractable = null;
+                if(Player.avaliableInteractable == this)
+                    Player.avaliableInteractable = null;
                 OnStepOut.Invoke();
             }
         }
