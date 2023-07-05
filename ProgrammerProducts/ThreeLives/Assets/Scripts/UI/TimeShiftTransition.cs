@@ -11,7 +11,6 @@ public class TimeShiftTransition : MonoBehaviour
     [SerializeField] GameObject currentMask;
     [SerializeField] GameObject maskEndPoint;
 
-
     Vector3 imgPos;
     Image screenImage;
     GameObject mask;
