@@ -10,9 +10,12 @@ namespace Platformer.Mechanics
     public class TransformOnTimeShift : MonoBehaviour
     {
         public bool _holdPlantedObjects = true;
-        public GameObject _pastForm, _currentForm;
-        public UnityEvent _onPast, _onCurrent;
-
+        [Header("GameObject")]
+        public GameObject _pastForm;
+        public GameObject _currentForm;
+        [Header("Event")]
+        public UnityEvent _onPast;
+        public UnityEvent _onCurrent;
         public bool HoldPlantedObjects => _holdPlantedObjects;
         public bool PreventTransform
         {
@@ -81,6 +84,12 @@ namespace Platformer.Mechanics
                     break;
             }
         }
+        public void PlantsSetActive(bool cond)
+        {
+            foreach (PlantableObject plant in GetComponentsInChildren<PlantableObject>())
+            {
+                plant.gameObject.SetActive(cond);
+            }
+        }
     }
-
 }

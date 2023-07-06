@@ -427,22 +427,22 @@ PrefabInstance:
     - target: {fileID: 3652222201272466852, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.49056602
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3652222201272466852, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.49056602
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3652222201272466852, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.49056602
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3652222201272466855, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3652222201272466855, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
@@ -494,7 +494,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3652222201272466854, guid: 605ac15e3bda10b49ae02217ebcd3b67, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 605ac15e3bda10b49ae02217ebcd3b67, type: 3}
 --- !u!4 &339151124 stripped
 Transform:
@@ -1304,7 +1305,7 @@ GameObject:
   - component: {fileID: 1078237678}
   - component: {fileID: 1078237679}
   m_Layer: 0
-  m_Name: WeakWalls
+  m_Name: OnPast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
