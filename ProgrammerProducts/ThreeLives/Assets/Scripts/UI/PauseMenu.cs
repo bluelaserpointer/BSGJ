@@ -23,11 +23,13 @@ namespace Platformer.UI
             {
                 if (Input.GetKey(KeyCode.R))
                 {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    SceneTransition.Instance.LoadNowScene();
                 }
-                else if(Input.GetKey(KeyCode.Q))
+                else if (Input.GetKey(KeyCode.Q))
                 {
-                    SceneManager.LoadScene("Chimneis");
+                    // SceneManager.LoadScene("Chimneis");
+                    SceneTransition.Instance.LoadNextScene("Chimneis");
                 }
             }
         }
@@ -48,7 +50,7 @@ namespace Platformer.UI
             else
             {
                 Time.timeScale = 1;
-                if(pauseMenuVisibleRoot != null)
+                if (pauseMenuVisibleRoot != null)
                     pauseMenuVisibleRoot.SetActive(false);
             }
         }

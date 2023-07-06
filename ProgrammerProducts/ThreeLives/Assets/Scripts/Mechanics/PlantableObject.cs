@@ -7,15 +7,17 @@ using UnityEngine;
 public abstract class PlantableObject : MonoBehaviour
 {
     [SerializeField]
-    TransformOnTimeShift _transformer;
+    Sprite _icon;
 
-    private void Start()
+    public Sprite Icon => _icon;
+    public bool PreventRetrieve { get; protected set; }
+
+    public virtual void PrepareDestroy()
     {
-        if(WorldManager.Instance.Timeline == Timeline.Current)
-        {
-            _transformer._currentForm.SetActive(false);
-            _transformer._currentForm = _transformer._pastForm;
-            _transformer._pastForm = null;
-        }
+    }
+    public void Destroy()
+    {
+        PrepareDestroy();
+        Destroy(gameObject);
     }
 }

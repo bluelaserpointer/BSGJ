@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 91ab67788a92b6140847fbd536a1737f
+  - enabled: 1
     path: Assets/Scenes/Tutorial-0.unity
     guid: 06077103a74cd6845af71603763af25f
   - enabled: 1
     path: Assets/Scenes/Tutorial-1.unity
     guid: 0f3c2a0216d723d458f51c36af023807
+  - enabled: 1
+    path: Assets/Scenes/Tutorial-2.unity
+    guid: 7c5436da1bb11a3479f66c46eb6b98fc
   - enabled: 1
     path: Assets/Scenes/Chimneis.unity
     guid: 494cf951fbb078248a0de705e865de44
@@ -26,4 +32,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Observatory.unity
     guid: cf7d155b6888d6049bfb4cfc27918acc
+  - enabled: 1
+    path: Assets/Scenes/Simple-0.unity
+    guid: 6d4e7c4a012adc04caa598d61245e00d
+  - enabled: 1
+    path: Assets/Scenes/Simple-1.unity
+    guid: 5ac38cd9c62a79442aadfd0e946ccf9f
+  - enabled: 1
+    path: Assets/Scenes/Simple-2.unity
+    guid: f781ebf407d7d3e46b90968bde116682
   m_configObjects: {}
