@@ -11,13 +11,18 @@ public class PlantSign : MonoBehaviour
     [SerializeField]
     SpriteRenderer plantIcon;
 
-    public bool Retrieveable => Plant.gameObject.activeInHierarchy && !Plant.PreventRetrieve;
+    public bool Retrieveable => Plant != null && Plant.gameObject.activeInHierarchy && !Plant.PreventRetrieve; // (currently ignored)
 
     void Update()
     {
         bool cond = Retrieveable;
         retrieveableState.SetActive(cond);
         notRetrieveableState.SetActive(!cond);
+    }
+    private void LateUpdate()
+    {
+        if (Plant != null)
+            transform.position = Plant.transform.position;
     }
     public void SetPlant(PlantableObject plant)
     {

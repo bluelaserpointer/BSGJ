@@ -151,34 +151,27 @@ namespace Platformer.Mechanics
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if(GroundCollider == null)
+                if (_idAndPlantedObjectSign.TryGetValue(SelectedItemIndex, out PlantSign plantSign))
+                {
+                    //retrieve old plant before planting new one
+                    _idAndIsRetrieving[SelectedItemIndex] = true;
+                    PlantRetriever retriever = Instantiate(_plantRetrieverPrefab);
+                    retriever.transform.position = plantSign.transform.position;
+                    retriever.Init(SelectedItemIndex);
+                    if (plantSign.Plant != null)
+                    {
+                        plantSign.Plant.Destroy();
+                    }
+                    Destroy(plantSign.gameObject);
+                    _idAndPlantedObjectSign.Remove(SelectedItemIndex);
+                }
+                else if (GroundCollider == null)
                 {
                     //cannnot plant in mid-air;
                 }
-                if (_idAndIsRetrieving[SelectedItemIndex])
+                else if (_idAndIsRetrieving[SelectedItemIndex])
                 {
                     //cannnot plant until the seed is retreiving
-                }
-                else if(_idAndPlantedObjectSign.TryGetValue(SelectedItemIndex, out PlantSign plantSign))
-                {
-                    //retrieve old plant before planting new one
-                    if (plantSign.Retrieveable)
-                    {
-                        _idAndIsRetrieving[SelectedItemIndex] = true;
-                        PlantRetriever retriever = Instantiate(_plantRetrieverPrefab);
-                        retriever.transform.position = plantSign.transform.position;
-                        retriever.Init(SelectedItemIndex);
-                        if (plantSign.Plant != null)
-                        {
-                            plantSign.Plant.Destroy();
-                        }
-                        Destroy(plantSign.gameObject);
-                        _idAndPlantedObjectSign.Remove(SelectedItemIndex);
-                    }
-                    else
-                    {
-                        //blink animation
-                    }
                 }
                 else
                 {
@@ -234,7 +227,7 @@ namespace Platformer.Mechanics
             //stop ignoring not overlapped penetrating colliders
             foreach (Collider2D penetratingCollider in _penetratingColliders.ToList())
             {
-                if(!Collider2d.Distance(penetratingCollider).isOverlapped)
+                if(penetratingCollider == null || !Collider2d.Distance(penetratingCollider).isOverlapped)
                 {
                     //print("penetration exit:" + penetratingCollider.gameObject.transform.parent.name);
                     _penetratingColliders.Remove(penetratingCollider);

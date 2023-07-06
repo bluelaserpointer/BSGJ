@@ -18,6 +18,10 @@ public class PlantedVine : PlantableObject
             WorldManager.Instance.onShiftTime.AddListener(UpdateRetrieveState);
         }
     }
+    private void Update()
+    {
+        transform.rotation = Quaternion.identity;
+    }
     private void UpdateRetrieveState()
     {
         if (WorldManager.Instance.Timeline == Timeline.Past)
