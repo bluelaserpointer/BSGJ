@@ -1796,6 +1796,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: AirFilter
       objectReference: {fileID: 0}
+    - target: {fileID: 6679653816169245537, guid: 3f19907364744a4468b280f5a1dc5212,
+        type: 3}
+      propertyPath: _identifier
+      value: 
+      objectReference: {fileID: 11400000, guid: 005837a59206a014d9976420f9a028c8,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f19907364744a4468b280f5a1dc5212, type: 3}
 --- !u!1001 &1348319499
@@ -2395,7 +2401,7 @@ PrefabInstance:
     - target: {fileID: 6801708931370828528, guid: 9d2dcee2c364caa4c8022b3a40728217,
         type: 3}
       propertyPath: m_Text
-      value: "\u82B1\u306F\u3001\u7BC4\u56F2\u5185\u306E\u8907\u6570\u306E\u7269\u306E\u5909\u5316\u3092\u6B62\u3081\u308C\u308B"
+      value: "\u82B1\u306F\u3001\u7BC4\u56F2\u5185\u306E\u8907\u6570\u306E\u7269\u304B\u3089\u30B3\u30D4\u30FC\u3092\u4F5C\u308C\u308B"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
