@@ -4877,6 +4877,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: AirFilter
       objectReference: {fileID: 0}
+    - target: {fileID: 6679653816169245537, guid: 3f19907364744a4468b280f5a1dc5212,
+        type: 3}
+      propertyPath: _identifier
+      value: 
+      objectReference: {fileID: 11400000, guid: 87725978d27d84f48a0c2dee8ebdb8e2,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f19907364744a4468b280f5a1dc5212, type: 3}
 --- !u!1001 &7781056866071833768

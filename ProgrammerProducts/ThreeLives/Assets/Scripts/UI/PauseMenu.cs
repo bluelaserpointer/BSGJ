@@ -29,7 +29,7 @@ namespace Platformer.UI
                 else if (Input.GetKey(KeyCode.Q))
                 {
                     // SceneManager.LoadScene("Chimneis");
-                    SceneTransition.Instance.LoadNextScene("Chimneis");
+                    SceneTransition.Instance.LoadNextScene("StageSelect");
                 }
             }
         }

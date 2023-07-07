@@ -2,33 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 
 public class StageSelector : MonoBehaviour
 {
-    [System.Serializable]
-	struct Stage
-	{
-        [SerializeField] [Tooltip("読み込むシーン名")]
-        public SceneObject sceneName; 
-        
-        [SerializeField] [Tooltip("読み込むシーンの画像")]
-        public Sprite sceneImage; 
-        
-        [SerializeField] [Tooltip("表示される文字")]
-        public string stageName;   
-	}
-    
-    [SerializeField] Stage[] StageList;
+    [SerializeField] StageInfo[] stageInfoList;
+    [SerializeField] int firstSelectIndex;
     [SerializeField] SpriteRenderer spriteImage;
-    [SerializeField] TMP_Text stageNameTMP;
+    [SerializeField] Text stageNameText;
 
-    int nowStage = 0;
+    int selectIndex;
+    StageInfo SelectingStage => stageInfoList[selectIndex];
 
     // Start is called before the first frame update
     void Start()
     {
-        SetStage(nowStage);
+        SetStage(selectIndex = firstSelectIndex);
     }
 
     // Update is called once per frame
@@ -39,29 +28,26 @@ public class StageSelector : MonoBehaviour
 
     void SetStage(int stageNumber)
     {
-        spriteImage.sprite = StageList[stageNumber].sceneImage;
-        stageNameTMP.text = StageList[stageNumber].stageName;
-
-        nowStage = stageNumber;
+        selectIndex = stageNumber;
+        spriteImage.sprite = SelectingStage.PreviewImage;
+        stageNameText.text = SelectingStage.DisplayName;
     }
 
     public void ShowNextStage()
     {
         // Debug.Log("next");
-        SetStage((nowStage + 1 + StageList.Length) % StageList.Length);
-
-
+        SetStage((selectIndex + 1 + stageInfoList.Length) % stageInfoList.Length);
     }
     public void ShowPreviousStage()
     {
         // Debug.Log("previous");
-        SetStage((nowStage - 1 + StageList.Length) % StageList.Length);
+        SetStage((selectIndex - 1 + stageInfoList.Length) % stageInfoList.Length);
 
     }
 
-        public void GoToNextStage()
+    public void GoToNextStage()
     {
-        SceneTransition.Instance.LoadNextScene(StageList[nowStage].sceneName);
+        SelectingStage.LoadScene();
     }
 
 }
