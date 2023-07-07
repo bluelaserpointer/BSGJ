@@ -12,13 +12,15 @@ public class GameUI : MonoBehaviour
     Text _itemCollectProgressText;
 
     public ItemBar ItemBar => _itemBar;
+    public int totalItemCount;
 
     private void Start()
     {
+        totalItemCount = Resources.LoadAll<CollectItemIdentifier>("CollectItemIdentifier").Length;
         UpdateUI();
     }
     public void UpdateUI()
     {
-        _itemCollectProgressText.text = SaveData.Instance.collectedItems.Count + "/3";
+        _itemCollectProgressText.text = SaveData.Instance.collectedItems.Count + " / " + totalItemCount;
     }
 }
