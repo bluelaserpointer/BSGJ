@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene:
     m_SceneName: ClockTower
-  previewImage: {fileID: 0}
+  previewImage: {fileID: 21300000, guid: bdde0fec0821c094d8e97f750fbb618c, type: 3}
   nameJP: "\u6642\u8A08\u5854"
   nameCN: "\u949F\u697C"

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene:
     m_SceneName: Simple-1
-  previewImage: {fileID: 0}
+  previewImage: {fileID: 21300000, guid: a69514b5a1925034fbb65c864bf5f3cc, type: 3}
   nameJP: "\u30D3\u30EB\u5185-2"
   nameCN: "\u5EFA\u7B51-2"
