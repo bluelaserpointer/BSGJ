@@ -11,6 +11,8 @@ public class TranslatedText : MonoBehaviour
     TranslatableSentenceSO so_sentence;
     [SerializeField]
     TranslatableSentence sentence;
+    [SerializeField]
+    Font jpFont, cnFont;
 
     // Update is called once per frame
     private void Start()
@@ -43,6 +45,9 @@ public class TranslatedText : MonoBehaviour
     {
         Text text = GetComponent<Text>();
         if (text != null)
+        {
             text.text = sentence;
+            text.font = TranslatableSentence.currentLanguage == Language.Japanese ? jpFont : cnFont;
+        }
     }
 }
