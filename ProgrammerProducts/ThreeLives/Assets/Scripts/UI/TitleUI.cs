@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class TitleUI : MonoBehaviour
 {
     [SerializeField]
+    Language _defaultLanguage;
+
+    [SerializeField]
     string _nextScene;
 
     [SerializeField]
@@ -17,10 +20,16 @@ public class TitleUI : MonoBehaviour
     [SerializeField]
     GameObject _languageSelectGroup;
 
+    [SerializeField]
+    Image _languageDisplay;
+    [SerializeField]
+    Sprite _jpLanguageSprite, _cnLanguageSprite;
+
     enum MenuState { WaitPush, MainMenu, LanguageSelect }
     MenuState _menuSatate = MenuState.WaitPush;
     private void Start()
     {
+        TranslatableSentence.currentLanguage = _defaultLanguage;
         UpdateUI();
     }
     void Update()
@@ -59,6 +68,14 @@ public class TitleUI : MonoBehaviour
                 _languageSelectGroup.GetComponentInChildren<Button>().Select();
                 break;
         }
+        if (TranslatableSentence.currentLanguage == Language.Japanese)
+        {
+            _languageDisplay.sprite = _jpLanguageSprite;
+        }
+        else
+        {
+            _languageDisplay.sprite = _cnLanguageSprite;
+        }
     }
     public void SetMenuStateByMenuObject(GameObject menuObject)
     {
@@ -83,5 +100,18 @@ public class TitleUI : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    public void ChangeLanguage()
+    {
+        if (TranslatableSentence.currentLanguage == Language.Chinese)
+        {
+            TranslatableSentence.currentLanguage = Language.Japanese;
+            _languageDisplay.sprite = _jpLanguageSprite;
+        }
+        else
+        {
+            TranslatableSentence.currentLanguage = Language.Chinese;
+            _languageDisplay.sprite = _cnLanguageSprite;
+        }
     }
 }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scene:
     m_SceneName: LadderAndVine
-  sceneImage: {fileID: 0}
+  previewImage: {fileID: 0}
   nameJP: "\u5C4B\u4E0A"
-  nameCN: 
+  nameCN: "\u5C4B\u9876"

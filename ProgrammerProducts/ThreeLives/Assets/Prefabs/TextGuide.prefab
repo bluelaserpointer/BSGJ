@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7781583068895881359}
   - component: {fileID: 7781583068895881353}
   - component: {fileID: 7781583068895881352}
+  - component: {fileID: 5989833657073834826}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -79,7 +80,28 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "E\u30AD\u30FC\u3067\u30BF\u30A4\u30E0\u30B7\u30D5\u30C8"
+  m_Text: 
+--- !u!114 &5989833657073834826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781583068895881358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d561019cad706e1429143609443eb8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysUpdate: 0
+  so_sentence: {fileID: 0}
+  sentence:
+    defaultString: ?missing?
+    languageAndSentences:
+    - language: 2
+      sentence: 
+    - language: 0
+      sentence: 
 --- !u!1 &7781583069033331079
 GameObject:
   m_ObjectHideFlags: 0
