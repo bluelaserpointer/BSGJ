@@ -7,6 +7,8 @@ public class SaveData : MonoBehaviour
 {
     public static SaveData Instance { get; private set; }
     public List<CollectItemIdentifier> collectedItems = new List<CollectItemIdentifier>();
+    [HideInInspector]
+    public float bgmPlaybackTime;
 
     public void Init()
     {
