@@ -2630,6 +2630,7 @@ GameObject:
   - component: {fileID: 1153636399}
   - component: {fileID: 1153636400}
   - component: {fileID: 1153636401}
+  - component: {fileID: 1153636402}
   m_Layer: 0
   m_Name: collider
   m_TagString: Untagged
@@ -2700,6 +2701,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 2.5359662}
   m_EdgeRadius: 0
+--- !u!114 &1153636402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153636398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae24744c707dffa499de2eb784fafeab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  penetratable: 0
 --- !u!1001 &1176320420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2786,6 +2800,7 @@ GameObject:
   - component: {fileID: 1221876645}
   - component: {fileID: 1221876647}
   - component: {fileID: 1221876646}
+  - component: {fileID: 1221876648}
   m_Layer: 0
   m_Name: collider (1)
   m_TagString: Untagged
@@ -2856,6 +2871,19 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &1221876648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221876644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae24744c707dffa499de2eb784fafeab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  penetratable: 0
 --- !u!1 &1243641716
 GameObject:
   m_ObjectHideFlags: 0
@@ -3833,6 +3861,7 @@ GameObject:
   - component: {fileID: 1696626389}
   - component: {fileID: 1696626390}
   - component: {fileID: 1696626391}
+  - component: {fileID: 1696626392}
   m_Layer: 0
   m_Name: collider
   m_TagString: Untagged
@@ -3903,6 +3932,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 4.2743464}
   m_EdgeRadius: 0
+--- !u!114 &1696626392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696626388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae24744c707dffa499de2eb784fafeab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  penetratable: 0
 --- !u!1 &1728007375
 GameObject:
   m_ObjectHideFlags: 0
@@ -4845,6 +4887,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: AirFilter
       objectReference: {fileID: 0}
+    - target: {fileID: 6679653816169245537, guid: 3f19907364744a4468b280f5a1dc5212,
+        type: 3}
+      propertyPath: _identifier
+      value: 
+      objectReference: {fileID: 11400000, guid: 87725978d27d84f48a0c2dee8ebdb8e2,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f19907364744a4468b280f5a1dc5212, type: 3}
 --- !u!1001 &7781056866071833768

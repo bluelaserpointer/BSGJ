@@ -31,6 +31,8 @@ namespace Platformer.Mechanics
         [SerializeField]
         FrozenFlower _frozenFlowerPrefab;
         [SerializeField]
+        PlantSign _plantSignPrefab;
+        [SerializeField]
         PlantRetriever _plantRetrieverPrefab;
         public List<int> avaliableItemsIndex = new List<int>(); 
         [Header("Mobility")]
@@ -88,7 +90,7 @@ namespace Platformer.Mechanics
         public bool OnLadder => onLadderCount > 0;
         List<Collider2D> _penetratingColliders = new List<Collider2D>();
 
-        Dictionary<int, PlantableObject> _idAndPlantedObject = new Dictionary<int, PlantableObject>();
+        Dictionary<int, PlantSign> _idAndPlantedObjectSign = new Dictionary<int, PlantSign>();
         Dictionary<int, bool> _idAndIsRetrieving = new Dictionary<int, bool>();
 
 
@@ -160,22 +162,27 @@ namespace Platformer.Mechanics
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if(_idAndIsRetrieving[SelectedItemIndex])
-                {
-                    //cannnot plant until the seed is retreiving
-                }
-                else if(_idAndPlantedObject.TryGetValue(SelectedItemIndex, out PlantableObject oldPlant))
+                if (_idAndPlantedObjectSign.TryGetValue(SelectedItemIndex, out PlantSign plantSign))
                 {
                     //retrieve old plant before planting new one
                     _idAndIsRetrieving[SelectedItemIndex] = true;
                     PlantRetriever retriever = Instantiate(_plantRetrieverPrefab);
-                    retriever.transform.position = oldPlant.transform.position;
+                    retriever.transform.position = plantSign.transform.position;
                     retriever.Init(SelectedItemIndex);
-                    if (oldPlant != null)
+                    if (plantSign.Plant != null)
                     {
-                        oldPlant.Destroy();
+                        plantSign.Plant.Destroy();
                     }
-                    _idAndPlantedObject.Remove(SelectedItemIndex);
+                    Destroy(plantSign.gameObject);
+                    _idAndPlantedObjectSign.Remove(SelectedItemIndex);
+                }
+                else if (GroundCollider == null)
+                {
+                    //cannnot plant in mid-air;
+                }
+                else if (_idAndIsRetrieving[SelectedItemIndex])
+                {
+                    //cannnot plant until the seed is retreiving
                 }
                 else
                 {
@@ -206,7 +213,10 @@ namespace Platformer.Mechanics
                     plant.transform.position = transform.position;
                     plant.transform.localScale = new Vector3(1 / plant.transform.parent.lossyScale.x, 1 / plant.transform.parent.lossyScale.y, 1 / plant.transform.parent.lossyScale.z);
                     WorldManager.Instance.PlayOneShotSound(_plantAudio);
-                    _idAndPlantedObject.Add(SelectedItemIndex, plant);
+                    PlantSign sign = Instantiate(_plantSignPrefab);
+                    sign.SetPlant(plant);
+                    sign.transform.position = plant.transform.position;
+                    _idAndPlantedObjectSign.Add(SelectedItemIndex, sign);
                 }
             }
             if (controlEnabled)
@@ -228,7 +238,7 @@ namespace Platformer.Mechanics
             //stop ignoring not overlapped penetrating colliders
             foreach (Collider2D penetratingCollider in _penetratingColliders.ToList())
             {
-                if(!Collider2d.Distance(penetratingCollider).isOverlapped)
+                if(penetratingCollider == null || !Collider2d.Distance(penetratingCollider).isOverlapped)
                 {
                     //print("penetration exit:" + penetratingCollider.gameObject.transform.parent.name);
                     _penetratingColliders.Remove(penetratingCollider);
@@ -302,12 +312,12 @@ namespace Platformer.Mechanics
         }
         public void RemoveAllPlantedObjects()
         {
-            foreach(var idAndPlant in _idAndPlantedObject)
+            foreach(var idAndPlant in _idAndPlantedObjectSign)
             {
                 if(idAndPlant.Value != null)
                     Destroy(idAndPlant.Value.gameObject);
             }
-            _idAndPlantedObject.Clear();
+            _idAndPlantedObjectSign.Clear();
         }
         public void OnRetrievedPlant(int plantId)
         {
