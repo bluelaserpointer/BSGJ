@@ -11,7 +11,9 @@ public class TimeShifter : Interactable
         base.Awake();
         OnInteract.AddListener(() =>
         {
-            WorldManager.Instance.SetTimeline(WorldManager.Instance.Timeline == Timeline.Current ? Timeline.Past : Timeline.Current);
+            if(!TimeShiftTransition.instance.isMoving){
+                WorldManager.Instance.SetTimeline(WorldManager.Instance.Timeline == Timeline.Current ? Timeline.Past : Timeline.Current);
+            }
         });
     }
 }

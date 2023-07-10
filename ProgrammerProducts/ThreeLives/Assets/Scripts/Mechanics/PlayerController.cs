@@ -126,6 +126,17 @@ namespace Platformer.Mechanics
             if (Input.GetKey(KeyCode.E))
             {
                 avaliableInteractable?.OnInteractStay.Invoke();
+                if(avaliableInteractable)
+                {
+                    controlEnabled = false;                    
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                if(avaliableInteractable)
+                {
+                    controlEnabled = true;                    
+                }
             }
             if (Input.GetKey(KeyCode.Alpha1))
             {
