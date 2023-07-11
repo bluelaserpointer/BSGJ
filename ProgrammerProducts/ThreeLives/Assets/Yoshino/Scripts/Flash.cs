@@ -11,7 +11,7 @@ public class Flash : MonoBehaviour
     //プッシュ状態の画像
     [SerializeField] private Sprite Pushing;
     //プッシュ画像を表示する時間
-    [SerializeField] private float PushingTime = 0.5f;
+    [SerializeField] private float pushingTime = 0.5f;
     //ボタンの状態
     [SerializeField] private bool button;
     //一度だけ押せるようにする
@@ -32,7 +32,7 @@ public class Flash : MonoBehaviour
     void Update()
     {
 
-        if (elapsedTime < PushingTime)
+        if (elapsedTime < pushingTime)
         {
             //プッシュ中の画像に切り替え
             sr.sprite = Pushing;

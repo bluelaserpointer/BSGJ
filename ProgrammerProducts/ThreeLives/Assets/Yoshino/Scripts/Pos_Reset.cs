@@ -13,7 +13,6 @@ public class Pos_Reset : MonoBehaviour
             case Timeline.Past:
                 //transform.position = pastPos;
                 pastPos = transform.position;
-                
                 break;
             case Timeline.Current:
                 transform.position = pastPos;

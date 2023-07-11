@@ -9,14 +9,15 @@ public class CrackFloor : MonoBehaviour
     [SerializeField] private float crackTime = 0.5f;
     //目標の角度
     [SerializeField] private float targetAngle = -45.0f;
-    //private Rigidbody2D rb;
+    //デフォルトの回転値
+    private Quaternion defaultRot;
     //アニメーションが終了したか
     private bool isCracked = false;
     //アニメーション中か
     private bool isPlaying = false;
     //経過時間
     private float elapsedTime = 0.0f;
-   
+
     public void SetMoveButton()
     {
         //１度ボタンが押されたら強制的に動かす
@@ -26,11 +27,23 @@ public class CrackFloor : MonoBehaviour
         isPlaying = true;
         elapsedTime = 0.0f;
     }
-
+    void Start()
+    {
+        defaultRot = Quaternion.Euler(0, 0, 0);
+    }
     // Update is called once per frame
     void Update()
     {
-        if (isPlaying) UpdateCrackAnim();
+        switch (WorldManager.Instance.Timeline)
+        {
+            case Timeline.Past:
+                transform.localRotation = defaultRot;
+                break;
+            case Timeline.Current:
+                if (isPlaying) UpdateCrackAnim();
+                break;
+        }
+        
     }
 
     void UpdateCrackAnim()
@@ -49,7 +62,7 @@ public class CrackFloor : MonoBehaviour
         {
             //経過時間を過ぎれば目標の角度にし、アニメーションを終了する
             transform.localRotation = Quaternion.Euler(0.0f, 0.0f, targetAngle);
-            isPlaying = false;
+            //isPlaying = false;
         }
     }
     public float QuartIn(float t, float totaltime, float min, float max)
