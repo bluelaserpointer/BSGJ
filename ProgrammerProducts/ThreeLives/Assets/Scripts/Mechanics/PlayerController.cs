@@ -74,7 +74,7 @@ namespace Platformer.Mechanics
         int _selectedItemIndex;
 
         private bool _stopJump;
-        bool _jump;
+        public bool _jump;
         bool _down;
         Vector2 _move;
         Vector2 slipoffNormal;
@@ -92,7 +92,6 @@ namespace Platformer.Mechanics
 
         Dictionary<int, PlantSign> _idAndPlantedObjectSign = new Dictionary<int, PlantSign>();
         Dictionary<int, bool> _idAndIsRetrieving = new Dictionary<int, bool>();
-
 
         void Awake()
         {

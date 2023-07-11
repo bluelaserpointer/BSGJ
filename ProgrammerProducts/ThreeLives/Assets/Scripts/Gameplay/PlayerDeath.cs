@@ -29,6 +29,7 @@ namespace Platformer.Gameplay
                 player._animator.SetTrigger("hurt");
                 player._animator.SetBool("dead", true);
                 Simulation.Schedule<PlayerSpawn>(2);
+                player.velocity.y = 5f;
             }
         }
     }
