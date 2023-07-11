@@ -27,14 +27,10 @@ public class TranslatedText : MonoBehaviour
     }
     void OnValidate()
     {
-        /*
         if (so_sentence != null)
         {
             sentence = new TranslatableSentence(so_sentence.sentence);
         }
-        else if (sentence == null)
-            return;
-        UpdateText();*/
     }
     private void Update()
     {
