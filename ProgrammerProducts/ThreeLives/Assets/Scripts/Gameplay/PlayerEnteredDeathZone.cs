@@ -15,4 +15,12 @@ namespace Platformer.Gameplay
             Simulation.Schedule<PlayerDeath>(0);
         }
     }
+    /// <typeparam name="PlayerEnteredDeathZoneSea"></typeparam>
+    public class PlayerEnteredDeathZoneSea : Simulation.Event<PlayerEnteredDeathZoneSea>
+    {
+        public override void Execute()
+        {
+            Simulation.Schedule<PlayerDeathSea>(0);
+        }
+    }
 }

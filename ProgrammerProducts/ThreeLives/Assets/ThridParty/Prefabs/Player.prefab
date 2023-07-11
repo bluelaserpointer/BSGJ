@@ -54,13 +54,14 @@ MonoBehaviour:
   gravityModifier: 1
   velocity: {x: 0, y: 0}
   jumpAudio: {fileID: 8300000, guid: 0ac04a932c47168419a2383776eaa82b, type: 3}
-  respawnAudio: {fileID: 8300000, guid: e18959d46b63f3c4c8cc020a433cf848, type: 3}
-  ouchAudio: {fileID: 8300000, guid: 6c05149e5a2fba64ba172e25a61074b7, type: 3}
+  respawnAudio: {fileID: 8300000, guid: 53a4484fc4b664ea98bd18cab5c1e64f, type: 3}
+  ouchAudio: {fileID: 8300000, guid: b22d95e2fbe574c709970412a0893159, type: 3}
   _plantAudio: {fileID: 8300000, guid: be1cabcf4be39b3418e310cd4df2f26e, type: 3}
   _vineSeedPrefab: {fileID: 4926947861819886457, guid: 3b73b0c224e72744b8d8bdc4487dff35,
     type: 3}
   _frozenFlowerPrefab: {fileID: 3923521367722662612, guid: 768a0838fe95d0b439ded6733d6df068,
     type: 3}
+  _plantSignPrefab: {fileID: 0}
   _plantRetrieverPrefab: {fileID: 3139648808736014552, guid: e7523e2dc27c2ea4a9b3e257d59fc3d2,
     type: 3}
   avaliableItemsIndex: 0000000001000000
@@ -69,6 +70,7 @@ MonoBehaviour:
   _maxClimbDownSpeed: 5
   jumpTakeOffSpeed: 3
   jumpState: 0
+  _jump: 0
   avaliableInteractable: {fileID: 0}
   onLadderCount: 0
 --- !u!212 &212064061491315838

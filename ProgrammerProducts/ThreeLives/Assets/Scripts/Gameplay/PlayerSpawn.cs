@@ -17,13 +17,13 @@ namespace Platformer.Gameplay
             player.Collider2d.enabled = true;
             player.controlEnabled = false;
             if (player.AudioSource && player.respawnAudio)
-                player.AudioSource.PlayOneShot(player.respawnAudio);
+                player.AudioSource.PlayOneShot(player.respawnAudio, 0.5f);
             player.Health.Increment();
             player.Teleport(model.spawnPoint.transform.position);
             player.jumpState = PlayerController.JumpState.Grounded;
             model.virtualCamera.m_Follow = player.transform;
             model.virtualCamera.m_LookAt = player.transform;
-            Simulation.Schedule<EnablePlayerInput>(1f);
+            Simulation.Schedule<EnablePlayerInput>(0.7f);
         }
     }
 }

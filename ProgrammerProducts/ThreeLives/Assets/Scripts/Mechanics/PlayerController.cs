@@ -22,6 +22,7 @@ namespace Platformer.Mechanics
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
+        public AudioClip ouchSeaAudio;
         [SerializeField]
         AudioClip _plantAudio;
 

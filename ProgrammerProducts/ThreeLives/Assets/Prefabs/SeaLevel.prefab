@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7781056865161565901}
   - component: {fileID: 7781056865161565903}
-  - component: {fileID: 7781056865161565902}
+  - component: {fileID: 7960003240247976759}
   m_Layer: 0
   m_Name: DeathZone (Sea)
   m_TagString: Untagged
@@ -59,7 +59,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 120, y: 10}
   m_EdgeRadius: 0
---- !u!114 &7781056865161565902
+--- !u!114 &7960003240247976759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7781056865161565900}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9473387ae50744bf946308793bd64e9, type: 3}
+  m_Script: {fileID: 11500000, guid: b92971b8180594994958cadf47df38d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7781056865242742118
