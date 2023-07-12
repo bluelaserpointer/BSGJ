@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Platformer.Model;
+using Platformer.Core;
 
 public class TimeShiftTransition : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class TimeShiftTransition : MonoBehaviour
     [SerializeField] GameObject currentMask;
     [SerializeField] GameObject maskEndPoint;
 
+    public static TimeShiftTransition instance;
+
     Vector3 imgPos;
     Image screenImage;
     GameObject mask;
@@ -18,7 +22,20 @@ public class TimeShiftTransition : MonoBehaviour
     Vector3 endMaskPos;
     float maskDistance;
     float startTime;
-    bool isMoving = false;
+    public bool isMoving = false;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void Update() // ワイプ動作
     {
@@ -34,6 +51,7 @@ public class TimeShiftTransition : MonoBehaviour
             }
             screenImage.transform.position = imgPos;
         }
+
     }
 
     public void ToTransition() // ワイプ設定 

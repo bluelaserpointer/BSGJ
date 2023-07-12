@@ -29,6 +29,12 @@ public class WorldManager : MonoBehaviour
     [SerializeField]
     AudioClip _timeshiftSE;
 
+    [Header("BGM")]
+    [SerializeField]
+    AudioSource _bgmAudioSource;
+    [SerializeField]
+    AudioClip _currentSE, _pastSE;
+
     public readonly UnityEvent
         onShiftTime = new UnityEvent(),
         onShiftPastTime = new UnityEvent(),
@@ -53,17 +59,25 @@ public class WorldManager : MonoBehaviour
             PlayOneShotSound(_timeshiftSE);
             _timeShiftTransition.ToTransition();
         }
+        if (_bgmAudioSource.clip != null)
+        {
+            SaveData.Instance.bgmPlaybackTime = _bgmAudioSource.time;
+        }
         switch (Timeline = timeline)
         {
             case Timeline.Past:
                 onShiftPastTime.Invoke();
                 _camera.backgroundColor = _pastBgColor;
+                _bgmAudioSource.clip = _pastSE;
                 break;
             case Timeline.Current:
                 onShiftCurrentTime.Invoke();
                 _camera.backgroundColor = _currentBgColor;
+                _bgmAudioSource.clip = _currentSE;
                 break;
         }
+        _bgmAudioSource.time = SaveData.Instance.bgmPlaybackTime;
+        _bgmAudioSource.Play();
         onShiftTime.Invoke();
     }
     public void LoadNewScene(string sceneName)

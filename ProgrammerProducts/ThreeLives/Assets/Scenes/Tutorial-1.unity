@@ -758,6 +758,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u5EFA\u7269\u306F\u673D\u3061\u305F\u308A\u3001\u65B0\u3057\u304F\u4F5C\u3089\u308C\u305F\u308A\u3059\u308B"
       objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "\u5EFA\u7269\u306F\u673D\u3061\u305F\u308A\u3001\u65B0\u3057\u304F\u4F5C\u3089\u308C\u305F\u308A\u3059\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "\u5EFA\u7B51\u4F1A\u5728\u672A\u6765\u635F\u574F\u6216\u65B0\u5EFA"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
 --- !u!1001 &686541198
@@ -1064,6 +1074,7 @@ GameObject:
   - component: {fileID: 841633425}
   - component: {fileID: 841633427}
   - component: {fileID: 841633426}
+  - component: {fileID: 841633428}
   m_Layer: 5
   m_Name: Text (Legacy) (1)
   m_TagString: Untagged
@@ -1133,6 +1144,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841633424}
   m_CullTransparentMesh: 1
+--- !u!114 &841633428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841633424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d561019cad706e1429143609443eb8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysUpdate: 0
+  so_sentence: {fileID: 0}
+  sentence:
+    defaultString: ?missing?
+    languageAndSentences:
+    - language: 2
+      sentence: "\u904E\u53BB\u306B\u623B\u308C\u3070\u5730\u5F62\u304C\u5909\u5316\u3059\u308B\u304B\u3082\u3057\u308C\u306A\u3044"
+    - language: 0
+      sentence: "\u8FC7\u53BB\u7684\u90E8\u5206\u5730\u5F62\u4F1A\u4E0E\u73B0\u5728\u4E0D\u540C"
+  jpFont: {fileID: 12800000, guid: 3450b312d1e137e438ce8c6faf3cb920, type: 3}
+  cnFont: {fileID: 12800000, guid: 11fd6785db9526c42abd6d989535c472, type: 3}
 --- !u!4 &859784023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8370613439495522000, guid: b6230383a7488c64d9cec65d9cf55982,
@@ -1428,6 +1462,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u6B21\u306E\u30B9\u30C6\u30FC\u30B8\u3078\u884C\u304F"
       objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "\u6B21\u306E\u30B9\u30C6\u30FC\u30B8\u3078\u884C\u304F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "\u524D\u5F80\u4E0B\u4E00\u5173"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
 --- !u!1001 &1010295534
@@ -1595,6 +1639,7 @@ GameObject:
   - component: {fileID: 1307169344}
   - component: {fileID: 1307169343}
   - component: {fileID: 1307169342}
+  - component: {fileID: 1307169345}
   m_Layer: 5
   m_Name: Text (Legacy) (1)
   m_TagString: Untagged
@@ -1664,6 +1709,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1307169345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307169341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d561019cad706e1429143609443eb8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysUpdate: 0
+  so_sentence: {fileID: 0}
+  sentence:
+    defaultString: ?missing?
+    languageAndSentences:
+    - language: 2
+      sentence: "\u2193:\u8584\u3044\u5E8A\u306F\u8526\u3067\u964D\u308A\u308C\u308B"
+    - language: 0
+      sentence: "\u2193\uFF1A\u8584\u5730\u9762\u53EF\u901A\u8FC7\u85E4\u66FC\u722C\u4E0B"
+  jpFont: {fileID: 12800000, guid: 3450b312d1e137e438ce8c6faf3cb920, type: 3}
+  cnFont: {fileID: 12800000, guid: 11fd6785db9526c42abd6d989535c472, type: 3}
 --- !u!1001 &1348242708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2454,6 +2522,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: "1:\u8526\u3092\u9078\u629E\nF:\u690D\u7269\u3092\u5730\u9762\u306B\u690D\u3048\u308B"
       objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "1:\u8526\u3092\u9078\u629E\nF:\u690D\u7269\u3092\u5730\u9762\u306B\u690D\u3048\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "1:\u9009\u62E9\u85E4\u66FC\u79CD\u5B50\nF:\u79CD\u4E0B\u9009\u62E9\u7684\u690D\u7269"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
 --- !u!1001 &1717664191
@@ -2970,6 +3048,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: "\u690D\u7269\u306F\u672A\u6765\u3067\u6210\u9577\u3059\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "\u690D\u7269\u306F\u672A\u6765\u3067\u6210\u9577\u3059\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "\u690D\u7269\u4F1A\u5728\u672A\u6765\u6210\u957F"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}

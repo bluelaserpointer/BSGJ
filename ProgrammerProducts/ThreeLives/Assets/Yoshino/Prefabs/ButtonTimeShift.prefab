@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e92798617a12c547b665dbebe969349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _holdPlantedObjects: 1
+  _holdPlantedObjects: 0
   _pastForm: {fileID: 4548724362534278263}
   _currentForm: {fileID: 6553531838348401619}
   _onPast:

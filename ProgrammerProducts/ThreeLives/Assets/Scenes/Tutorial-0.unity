@@ -523,6 +523,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u58CA\u308C\u305F\u68AF\u5B50\u306F\u767B\u308C\u306A\u3044"
       objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "\u58CA\u308C\u305F\u68AF\u5B50\u306F\u767B\u308C\u306A\u3044"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "\u635F\u574F\u7684\u68AF\u5B50\u65E0\u6CD5\u6500\u722C"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
 --- !u!4 &478225298 stripped
@@ -782,6 +792,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u30B8\u30E3\u30F3\u30D7\uFF1Aspace"
       objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "\u30B8\u30E3\u30F3\u30D7\uFF1Aspace"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "\u8DF3\u8DC3\uFF1A\u7A7A\u683C\u952E"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
 --- !u!1001 &851500222
@@ -865,6 +885,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: "E\u30AD\u30FC\u3067\u30BF\u30A4\u30E0\u30B7\u30D5\u30C8\n\u904E\u53BB\u3068\u73FE\u5728\u3092\u5207\u308A\u66FF\u3048\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "E\u30AD\u30FC\u3067\u30BF\u30A4\u30E0\u30B7\u30D5\u30C8\n\u904E\u53BB\u3068\u73FE\u5728\u3092\u5207\u308A\u66FF\u3048\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "E\u952E\u5207\u6362\u65F6\u95F4\u7EBF\n\u8BBF\u95EE\u8FC7\u53BB\u7684\u65F6\u4EE3"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
@@ -1108,6 +1138,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u6B21\u306E\u30B9\u30C6\u30FC\u30B8\u3078\u884C\u304F"
       objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "\u6B21\u306E\u30B9\u30C6\u30FC\u30B8\u3078\u884C\u304F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "\u524D\u5F80\u4E0B\u4E00\u5173"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
 --- !u!1001 &1010295534
@@ -1290,6 +1330,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: "\u6642\u306E\u9055\u3044\u3092\u5229\u7528\u3057\n\u65B0\u305F\u306A\u9053\u3092\u767A\u898B\u3059\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "\u6642\u306E\u9055\u3044\u3092\u5229\u7528\u3057\n\u65B0\u305F\u306A\u9053\u3092\u767A\u898B\u3059\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "\u5229\u7528\u65F6\u4EE3\u5DEE\u5F02\n\u53D1\u73B0\u65B0\u7684\u9053\u8DEF"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
@@ -2075,6 +2125,16 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u68AF\u5B50\uFF1A\u30B8\u30E3\u30F3\u30D7\u3067\u767B\u308B\n\u2193\uFF1A\u68AF\u5B50\u304B\u3089\u964D\u308A\u308B"
       objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "\u68AF\u5B50\uFF1A\u30B8\u30E3\u30F3\u30D7\u3067\u767B\u308B\n\u2193\uFF1A\u68AF\u5B50\u304B\u3089\u964D\u308A\u308B"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "\u68AF\u5B50\u53EF\u901A\u8FC7\u8DF3\u8DC3\u6500\u722C\n\u2193\u952E\u722C\u4E0B"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
 --- !u!1 &1604209614
@@ -2522,6 +2582,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801708931370828528, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u79FB\u52D5\uFF1A\u2190\u2192"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[0].sentence
+      value: "\u79FB\u52D5\uFF1A\u2190\u2192"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[1].sentence
+      value: "\u79FB\u52A8\uFF1A\u5DE6\u53F3\u952E"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}

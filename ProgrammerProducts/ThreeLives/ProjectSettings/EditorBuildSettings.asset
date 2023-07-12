@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial-2.unity
     guid: 7c5436da1bb11a3479f66c46eb6b98fc
   - enabled: 1
+    path: Assets/Scenes/StageSelect.unity
+    guid: fafa4ad6856054fe6b24c8a413666d3a
+  - enabled: 1
     path: Assets/Scenes/Chimneis.unity
     guid: 494cf951fbb078248a0de705e865de44
   - enabled: 1
