@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stepInActiveObj: {fileID: 0}
+  _rejectInteraction: 0
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -72,10 +73,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cf235c1596c7648bf159dd410280de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  On: {fileID: 21300000, guid: 340d0e54d518d9446a82cc627d4168f2, type: 3}
-  Off: {fileID: 21300000, guid: 021d052c604e14746a21bae369f1e741, type: 3}
+  On: {fileID: 21300000, guid: 021d052c604e14746a21bae369f1e741, type: 3}
+  Off: {fileID: 21300000, guid: 340d0e54d518d9446a82cc627d4168f2, type: 3}
   Pushing: {fileID: 21300000, guid: 402b56245c4cf19409bd9180b15d807a, type: 3}
-  PushingTime: 0
+  pushingTime: 0.5
   button: 0
   keepPush: 0
 --- !u!212 &7978478716663590771
