@@ -13,17 +13,17 @@ namespace Platformer.Gameplay
         {
             PlatformerModel model = Simulation.GetModel<PlatformerModel>();
             var player = model.Player;
+            player._animator.SetBool("dead", false);
             player.Collider2d.enabled = true;
             player.controlEnabled = false;
             if (player.AudioSource && player.respawnAudio)
-                player.AudioSource.PlayOneShot(player.respawnAudio);
+                player.AudioSource.PlayOneShot(player.respawnAudio, 0.5f);
             player.Health.Increment();
             player.Teleport(model.spawnPoint.transform.position);
             player.jumpState = PlayerController.JumpState.Grounded;
-            player._animator.SetBool("dead", false);
             model.virtualCamera.m_Follow = player.transform;
             model.virtualCamera.m_LookAt = player.transform;
-            Simulation.Schedule<EnablePlayerInput>(2f);
+            Simulation.Schedule<EnablePlayerInput>(0.7f);
         }
     }
 }
