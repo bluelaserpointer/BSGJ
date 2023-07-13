@@ -29,6 +29,7 @@ public class FrozenFlower : PlantableObject
                 }
             }
         }
+        Dictionary<Collider2D, Collider2D> copyRecord = new Dictionary<Collider2D, Collider2D>();
         colliders.ForEach(collider => {
             GameObject copy = new GameObject(collider.name);
             copy.transform.SetParent(_copiesHierarchyRoot, true);
@@ -74,7 +75,9 @@ public class FrozenFlower : PlantableObject
             {
                 copyCollider.isTrigger = collider.isTrigger;
             }
+            copyRecord.Add(collider, copyCollider);
         });
+        PlayerController.Instance.flowerCopyRecord = copyRecord;
         renderers.ForEach(renderer => {
             SpriteRenderer rendererCopy = new GameObject(renderer.name).AddComponent<SpriteRenderer>();
             rendererCopy.transform.SetParent(_copiesHierarchyRoot);

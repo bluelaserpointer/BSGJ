@@ -60,6 +60,7 @@ namespace Platformer.Mechanics
         public Bounds Bounds => Collider2d.bounds;
         public Health Health { get; private set; }
         public AudioSource AudioSource { get; private set; }
+        public Dictionary<Collider2D, Collider2D> flowerCopyRecord = new Dictionary<Collider2D, Collider2D>();
 
         public int SelectedItemIndex
         {
@@ -188,14 +189,21 @@ namespace Platformer.Mechanics
                 {
                     //plant new one
                     Transform seedTarget;
-                    TransformOnTimeShift parentTransformNode = GroundCollider.GetComponentInParent<TransformOnTimeShift>();
-                    if(parentTransformNode != null && parentTransformNode.HoldPlantedObjects)
+                    if(flowerCopyRecord != null && flowerCopyRecord.TryGetValue(GroundCollider, out Collider2D copyCollider) && copyCollider != null)
                     {
-                        seedTarget = parentTransformNode.transform;
+                        seedTarget = copyCollider.transform;
                     }
                     else
                     {
-                        seedTarget = GroundCollider.transform;
+                        TransformOnTimeShift parentTransformNode = GroundCollider.GetComponentInParent<TransformOnTimeShift>();
+                        if (parentTransformNode != null && parentTransformNode.HoldPlantedObjects)
+                        {
+                            seedTarget = parentTransformNode.transform;
+                        }
+                        else
+                        {
+                            seedTarget = GroundCollider.transform;
+                        }
                     }
                     PlantableObject plant = null;
                     switch (SelectedItemIndex)

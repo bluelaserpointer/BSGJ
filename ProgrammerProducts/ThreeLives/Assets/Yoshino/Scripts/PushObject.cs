@@ -39,19 +39,21 @@ public class PushObject : MonoBehaviour
             //childBlock.GetComponent<Rigidbody2D>().gravityScale = 0;
             rb.gravityScale = 0;
             rb.velocity = Vector2.zero;
+
             // ジャンプすると解除
-            if (0.1 < offsetPos.y - transform.position.y + player.transform.position.y)
+            if (0.1 < Mathf.Abs(offsetPos.y - transform.position.y + player.transform.position.y))
             {
                 isMoving = false;
             }
-
-            // プレイヤーと一緒にブロックを動かす
-            Vector3 pos = player.transform.position + offsetPos;
-            pos.y = defaultPos.y;
-            transform.position = pos;
-
-
-
+            //差分ー岩＋プレイヤー<0
+            if (offsetPos.x > 0 && offsetPos.x - transform.position.x + player.transform.position.x > 0 ||
+                offsetPos.x < 0 && offsetPos.x - transform.position.x + player.transform.position.x < 0)
+            {
+                //プレイヤーと一緒にブロックを動かす
+                Vector3 pos = player.transform.position + offsetPos;
+                pos.y = defaultPos.y;
+                transform.position = pos;
+            }
         }
         else
         {
@@ -77,7 +79,7 @@ public class PushObject : MonoBehaviour
         {
             // blockを押してる間、プレイヤーの速度を下げる
             tmpSpeed = model.Player.maxSpeed;
-            
+
             model.Player.maxSpeed = limitedSpeed;
         }
     }
