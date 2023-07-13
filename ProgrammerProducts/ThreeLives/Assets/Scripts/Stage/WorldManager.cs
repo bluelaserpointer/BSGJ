@@ -4,6 +4,7 @@ using Platformer.Model;
 using Platformer.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -14,8 +15,15 @@ public enum Timeline { Past, Current }
 public class WorldManager : MonoBehaviour
 {
     //inspector
+    [Header("Debug")]
     [SerializeField]
-    Color _pastBgColor, _currentBgColor;
+    int _initialAirFilterAmount;
+
+    [Header("etc")]
+    [SerializeField]
+    Color _pastBgColor;
+    [SerializeField]
+    Color _currentBgColor;
     [SerializeField]
     Camera _camera;
     [SerializeField]
@@ -24,6 +32,8 @@ public class WorldManager : MonoBehaviour
     GameUI _gameUI;
     [SerializeField]
     TimeShiftTransition _timeShiftTransition;
+    [SerializeField]
+    CanvasGroupFader _gameClearTransition;
 
     [Header("SE")]
     [SerializeField]
@@ -43,14 +53,23 @@ public class WorldManager : MonoBehaviour
     public static WorldManager Instance { get; private set; }
     public GameUI GameUI => _gameUI;
     public Timeline Timeline { get; private set; }
+    public float gameClearTimeCounter = -1;
 
     private void Awake()
     {
         Instance = this;
         SetTimeline(defaultTimeline, true);
     }
+    private void Start()
+    {
+        for (int i = 0; i < _initialAirFilterAmount; i++)
+            SaveData.Instance.collectedItems.Add(null);
+    }
     private void Update()
     {
+        if (gameClearTimeCounter != -1 && Time.timeSinceLevelLoad - gameClearTimeCounter > 1){
+            SceneManager.LoadScene("GameClear");
+        }
     }
     public void SetTimeline(Timeline timeline, bool initalizing = false)
     {
@@ -89,5 +108,11 @@ public class WorldManager : MonoBehaviour
     public void PlayOneShotSound(AudioClip clip)
     {
         PlayerController.Instance.AudioSource.PlayOneShot(clip);
+    }
+    public void GameClear()
+    {
+        _gameClearTransition.SetTargetAlpha(1);
+        PlayerController.Instance.enabled = false;
+        gameClearTimeCounter = Time.timeSinceLevelLoad;
     }
 }

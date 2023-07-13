@@ -23,5 +23,10 @@ public class SaveData : MonoBehaviour
         }
         collectedItems.Add(itemIdentifier);
         WorldManager.Instance.GameUI.UpdateUI();
+        if (collectedItems.Count == WorldManager.Instance.GameUI.totalItemCount)
+        {
+            WorldManager.Instance.GameClear();
+            collectedItems.Clear();
+        }
     }
 }
