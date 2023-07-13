@@ -1964,6 +1964,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 726832480697463638, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726832480697463638, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726832480697463638, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726832480697463638, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2056451899995323985, guid: c0867bcfe1d9cc1408a5923b378e4556,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2037,12 +2057,12 @@ PrefabInstance:
     - target: {fileID: 2056451901760260148, guid: c0867bcfe1d9cc1408a5923b378e4556,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.29111147
+      value: -0.29683733
       objectReference: {fileID: 0}
     - target: {fileID: 2056451901760260148, guid: c0867bcfe1d9cc1408a5923b378e4556,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.55
+      value: -2.549999
       objectReference: {fileID: 0}
     - target: {fileID: 2056451901899534859, guid: c0867bcfe1d9cc1408a5923b378e4556,
         type: 3}
@@ -2139,10 +2159,50 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9191152742754021230, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191152742754021230, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191152742754021230, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191152742754021230, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9191152743215652981, guid: c0867bcfe1d9cc1408a5923b378e4556,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191152743222915807, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191152743222915807, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191152743222915807, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191152743222915807, guid: c0867bcfe1d9cc1408a5923b378e4556,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0867bcfe1d9cc1408a5923b378e4556, type: 3}
@@ -5842,5 +5902,7 @@ MonoBehaviour:
       sentence: "\u7DD1\u8272\u306E\u30E2\u30CE\u306F\u30BF\u30A4\u30E0\u30B7\u30D5\u30C8\u306E\n\u5F71\u97FF\u3092\u53D7\u3051\u306A\u3044"
     - language: 0
       sentence: "\u7EFF\u8272\u53D8\u79CD\u4E0D\u4F1A\u53D7\u5230\r\n\u65F6\u95F4\u5207\u6362\u7684\u5F71\u54CD"
+    - language: 3
+      sentence: "\u7DD1\u8272\u306E\u30E2\u30CE\u306F\u30BF\u30A4\u30E0\u30B7\u30D5\u30C8\u306E\n\u5F71\u97FF\u3092\u53D7\u3051\u306A\u3044"
   jpFont: {fileID: 12800000, guid: 3450b312d1e137e438ce8c6faf3cb920, type: 3}
   cnFont: {fileID: 12800000, guid: 11fd6785db9526c42abd6d989535c472, type: 3}

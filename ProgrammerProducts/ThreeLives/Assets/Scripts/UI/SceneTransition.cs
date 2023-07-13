@@ -48,6 +48,7 @@ public class SceneTransition : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.T))
         {
             LoadNextScene("Title");
+            SaveData.Instance.collectedItems.Clear();
         }
     }
     public void LoadNextScene(string nextSceneName)
