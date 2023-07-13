@@ -1278,7 +1278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c1e7a486e123d4981f6008a3e06ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultLanguage: 2
+  _defaultLanguage: 3
   _nextScene: Tutorial-0
   _waitPushGroup: {fileID: 2011459844}
   _mainMenuGroup: {fileID: 524615175}
@@ -1286,6 +1286,8 @@ MonoBehaviour:
   _languageDisplay: {fileID: 880438840}
   _jpLanguageSprite: {fileID: 21300000, guid: e1c89342484582441b8e6a2b234011f9, type: 3}
   _cnLanguageSprite: {fileID: 21300000, guid: e92e9195063f3494296023c93b9582e5, type: 3}
+  _jpPadLanguageSprite: {fileID: 21300000, guid: e15d19d7a34a746ab827861ecd1fb856,
+    type: 3}
 --- !u!114 &1255967173
 MonoBehaviour:
   m_ObjectHideFlags: 0

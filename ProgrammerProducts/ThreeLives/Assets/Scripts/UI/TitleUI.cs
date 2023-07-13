@@ -23,7 +23,7 @@ public class TitleUI : MonoBehaviour
     [SerializeField]
     Image _languageDisplay;
     [SerializeField]
-    Sprite _jpLanguageSprite, _cnLanguageSprite;
+    Sprite _jpLanguageSprite, _cnLanguageSprite, _jpPadLanguageSprite;
 
     enum MenuState { WaitPush, MainMenu, LanguageSelect }
     MenuState _menuSatate = MenuState.WaitPush;
@@ -72,6 +72,10 @@ public class TitleUI : MonoBehaviour
         {
             _languageDisplay.sprite = _jpLanguageSprite;
         }
+        if (TranslatableSentence.currentLanguage == Language.JapanesePad)
+        {
+            _languageDisplay.sprite = _jpPadLanguageSprite;
+        }
         else
         {
             _languageDisplay.sprite = _cnLanguageSprite;
@@ -107,6 +111,11 @@ public class TitleUI : MonoBehaviour
         {
             TranslatableSentence.currentLanguage = Language.Japanese;
             _languageDisplay.sprite = _jpLanguageSprite;
+        }
+        else if (TranslatableSentence.currentLanguage == Language.Japanese)
+        {
+            TranslatableSentence.currentLanguage = Language.JapanesePad;
+            _languageDisplay.sprite = _jpPadLanguageSprite;
         }
         else
         {

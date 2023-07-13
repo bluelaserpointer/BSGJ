@@ -219,6 +219,7 @@ namespace Platformer.Mechanics
                     _idAndPlantedObjectSign.Add(SelectedItemIndex, sign);
                 }
             }
+
             if (controlEnabled)
             {
                 _move.x = Input.GetAxis("Horizontal");

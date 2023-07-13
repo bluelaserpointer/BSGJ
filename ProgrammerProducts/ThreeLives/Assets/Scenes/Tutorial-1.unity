@@ -287,7 +287,7 @@ PrefabInstance:
     - target: {fileID: 2056451901760260148, guid: c0867bcfe1d9cc1408a5923b378e4556,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.3111124
+      value: -7.3076754
       objectReference: {fileID: 0}
     - target: {fileID: 2056451901760260148, guid: c0867bcfe1d9cc1408a5923b378e4556,
         type: 3}
@@ -371,7 +371,7 @@ PrefabInstance:
     - target: {fileID: 3652222201272466855, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3652222201272466855, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
@@ -768,6 +768,11 @@ PrefabInstance:
       propertyPath: sentence.languageAndSentences.Array.data[1].sentence
       value: "\u5EFA\u7B51\u4F1A\u5728\u672A\u6765\u635F\u574F\u6216\u65B0\u5EFA"
       objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[2].sentence
+      value: "\u5EFA\u7269\u306F\u673D\u3061\u305F\u308A\u3001\u65B0\u3057\u304F\u4F5C\u3089\u308C\u305F\u308A\u3059\u308B"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
 --- !u!1001 &686541198
@@ -1009,7 +1014,7 @@ PrefabInstance:
     - target: {fileID: 5563221773413416756, guid: 455e22ac7e436df4084165e631e315b6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5563221773413416756, guid: 455e22ac7e436df4084165e631e315b6,
         type: 3}
@@ -1165,6 +1170,8 @@ MonoBehaviour:
       sentence: "\u904E\u53BB\u306B\u623B\u308C\u3070\u5730\u5F62\u304C\u5909\u5316\u3059\u308B\u304B\u3082\u3057\u308C\u306A\u3044"
     - language: 0
       sentence: "\u8FC7\u53BB\u7684\u90E8\u5206\u5730\u5F62\u4F1A\u4E0E\u73B0\u5728\u4E0D\u540C"
+    - language: 3
+      sentence: "\u904E\u53BB\u306B\u623B\u308C\u3070\u5730\u5F62\u304C\u5909\u5316\u3059\u308B\u304B\u3082\u3057\u308C\u306A\u3044"
   jpFont: {fileID: 12800000, guid: 3450b312d1e137e438ce8c6faf3cb920, type: 3}
   cnFont: {fileID: 12800000, guid: 11fd6785db9526c42abd6d989535c472, type: 3}
 --- !u!4 &859784023 stripped
@@ -1405,7 +1412,7 @@ PrefabInstance:
     - target: {fileID: 3862182678322849854, guid: 9d2dcee2c364caa4c8022b3a40728217,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3862182678322849854, guid: 9d2dcee2c364caa4c8022b3a40728217,
         type: 3}
@@ -1472,6 +1479,11 @@ PrefabInstance:
       propertyPath: sentence.languageAndSentences.Array.data[1].sentence
       value: "\u524D\u5F80\u4E0B\u4E00\u5173"
       objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[2].sentence
+      value: "\u6B21\u306E\u30B9\u30C6\u30FC\u30B8\u3078\u884C\u304F"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
 --- !u!1001 &1010295534
@@ -1489,7 +1501,7 @@ PrefabInstance:
     - target: {fileID: 5519193404573441535, guid: 7d065386222666d47aded3a80ea088db,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5519193404573441535, guid: 7d065386222666d47aded3a80ea088db,
         type: 3}
@@ -1558,7 +1570,7 @@ PrefabInstance:
     - target: {fileID: 4254240310541556920, guid: a26a18ddca0bf044c8b4999cd1f1bb85,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4254240310541556920, guid: a26a18ddca0bf044c8b4999cd1f1bb85,
         type: 3}
@@ -1730,6 +1742,8 @@ MonoBehaviour:
       sentence: "\u2193:\u8584\u3044\u5E8A\u306F\u8526\u3067\u964D\u308A\u308C\u308B"
     - language: 0
       sentence: "\u2193\uFF1A\u8584\u5730\u9762\u53EF\u901A\u8FC7\u85E4\u66FC\u722C\u4E0B"
+    - language: 3
+      sentence: "L\u30B9\u30C6\u30A3\u30C3\u30AF\u2193:\u8584\u3044\u5E8A\u306F\u8526\u3067\u964D\u308A\u308C\u308B"
   jpFont: {fileID: 12800000, guid: 3450b312d1e137e438ce8c6faf3cb920, type: 3}
   cnFont: {fileID: 12800000, guid: 11fd6785db9526c42abd6d989535c472, type: 3}
 --- !u!1001 &1348242708
@@ -1772,7 +1786,7 @@ PrefabInstance:
     - target: {fileID: 3652222201272466855, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3652222201272466855, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
@@ -2156,7 +2170,7 @@ Transform:
   - {fileID: 170194298}
   - {fileID: 1348242709}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1426576200
 PrefabInstance:
@@ -2321,7 +2335,7 @@ PrefabInstance:
     - target: {fileID: 3652222201272466855, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3652222201272466855, guid: 605ac15e3bda10b49ae02217ebcd3b67,
         type: 3}
@@ -2531,6 +2545,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sentence.languageAndSentences.Array.data[1].sentence
       value: "1:\u9009\u62E9\u85E4\u66FC\u79CD\u5B50\nF:\u79CD\u4E0B\u9009\u62E9\u7684\u690D\u7269"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[2].sentence
+      value: "\u271C\u2190:\u8526\u3092\u9078\u629E\nY:\u690D\u7269\u3092\u5730\u9762\u306B\u690D\u3048\u308B"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}
@@ -2992,7 +3011,7 @@ PrefabInstance:
     - target: {fileID: 3862182678322849854, guid: 9d2dcee2c364caa4c8022b3a40728217,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3862182678322849854, guid: 9d2dcee2c364caa4c8022b3a40728217,
         type: 3}
@@ -3058,6 +3077,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sentence.languageAndSentences.Array.data[1].sentence
       value: "\u690D\u7269\u4F1A\u5728\u672A\u6765\u6210\u957F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401968727981224242, guid: 9d2dcee2c364caa4c8022b3a40728217,
+        type: 3}
+      propertyPath: sentence.languageAndSentences.Array.data[2].sentence
+      value: "\u690D\u7269\u306F\u672A\u6765\u3067\u6210\u9577\u3059\u308B"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d2dcee2c364caa4c8022b3a40728217, type: 3}

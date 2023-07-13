@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Language { Chinese, English, Japanese }
+public enum Language { Chinese, English, Japanese ,JapanesePad}
 
 [Serializable]
 public class TranslatableSentence

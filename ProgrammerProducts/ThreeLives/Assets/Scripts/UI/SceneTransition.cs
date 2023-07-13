@@ -44,6 +44,11 @@ public class SceneTransition : MonoBehaviour
                 }
             }
         }
+        
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            LoadNextScene("Title");
+        }
     }
     public void LoadNextScene(string nextSceneName)
     {

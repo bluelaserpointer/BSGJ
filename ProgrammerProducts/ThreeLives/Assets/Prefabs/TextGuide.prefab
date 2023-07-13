@@ -102,6 +102,8 @@ MonoBehaviour:
       sentence: 
     - language: 0
       sentence: 
+    - language: 3
+      sentence: 
   jpFont: {fileID: 12800000, guid: 3450b312d1e137e438ce8c6faf3cb920, type: 3}
   cnFont: {fileID: 12800000, guid: 11fd6785db9526c42abd6d989535c472, type: 3}
 --- !u!1 &7781583069033331079

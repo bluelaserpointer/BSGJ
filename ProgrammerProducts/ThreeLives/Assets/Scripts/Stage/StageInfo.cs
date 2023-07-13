@@ -13,7 +13,7 @@ public class StageInfo : ScriptableObject
     [SerializeField]
     string nameJP, nameCN;
 
-    public string DisplayName => TranslatableSentence.currentLanguage == Language.Japanese ? nameJP : nameCN;
+    public string DisplayName => (TranslatableSentence.currentLanguage == Language.Japanese) || (TranslatableSentence.currentLanguage == Language.JapanesePad) ? nameJP : nameCN;
     public Sprite PreviewImage => previewImage;
     public string LoadName => scene;
     public void LoadScene()
