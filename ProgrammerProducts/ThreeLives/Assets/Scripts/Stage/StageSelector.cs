@@ -17,13 +17,19 @@ public class StageSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetStage(selectIndex = firstSelectIndex);
+        try
+        {
+            SetStage(selectIndex = firstSelectIndex);
+        }
+        catch (System.Exception e)
+        {
+            WorldManager.Instance.DebugText.text = e.Message;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     void SetStage(int stageNumber)

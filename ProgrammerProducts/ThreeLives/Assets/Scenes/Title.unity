@@ -1278,7 +1278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c1e7a486e123d4981f6008a3e06ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultLanguage: 2
+  _defaultLanguage: 0
   _nextScene: Tutorial-0
   _waitPushGroup: {fileID: 2011459844}
   _mainMenuGroup: {fileID: 524615175}

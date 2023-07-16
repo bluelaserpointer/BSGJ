@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum Timeline { Past, Current }
 
@@ -18,6 +19,8 @@ public class WorldManager : MonoBehaviour
     [Header("Debug")]
     [SerializeField]
     int _initialAirFilterAmount;
+    [SerializeField]
+    Text _debugText;
 
     [Header("etc")]
     [SerializeField]
@@ -53,15 +56,16 @@ public class WorldManager : MonoBehaviour
     public static WorldManager Instance { get; private set; }
     public GameUI GameUI => _gameUI;
     public Timeline Timeline { get; private set; }
+    public Text DebugText => _debugText;
     public float gameClearTimeCounter = -1;
 
     private void Awake()
     {
         Instance = this;
-        SetTimeline(defaultTimeline, true);
     }
     private void Start()
     {
+        SetTimeline(defaultTimeline, true);
         for (int i = 0; i < _initialAirFilterAmount; i++)
             SaveData.Instance.collectedItems.Add(null);
     }

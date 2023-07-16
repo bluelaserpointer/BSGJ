@@ -13,6 +13,7 @@ public class SaveData : MonoBehaviour
     public void Init()
     {
         Instance = this;
+        bgmPlaybackTime = 0;
     }
     public void CollectItem(CollectItemIdentifier itemIdentifier)
     {

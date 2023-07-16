@@ -2124,7 +2124,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextGuide (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5989833657073834826, guid: 4959094e19568ab4dbbc39a04c9fbb5e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4959094e19568ab4dbbc39a04c9fbb5e, type: 3}
 --- !u!224 &4002920598799889795 stripped
 RectTransform:
